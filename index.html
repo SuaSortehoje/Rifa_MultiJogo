@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <img src="">
-    <title>Rifa de 100 Dezenas</title>
+    <title>Rifa de Dezenas</title>
       <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,6 +14,7 @@
 
         h1, h2 {
             text-align: center;
+            color:
             
             
         }
@@ -95,10 +96,21 @@
        totalAPagar{
            colpr:green;
        }
+       h {
+           color:green;
+           border-radius:10px;
+       }
+       h {
+           animation: h 1s infinite;
+       }
+       @keyframes h{ 
+           20% {background-color:red}
+           
+       }
     </style>
 </head>
 <body>
-<h1>Rifa Dezenas <br>R$ 5.00 PARA 400 </h1>
+<h1>Rifa DEZENA<h> 10:00h </h><br>R$ 5.00 PARA 400 </h1>
 <div id="rifa">
     <ul id="dezenas"></ul>
     <button id="comprarBtn">Comprar</button>
@@ -147,7 +159,7 @@ for (let i = 0; i <= 99; i++) {
                     numerosSelecionados.push(li.textContent);
                 });
                 const totalAPagar = selecionadas.length * 5; // Valor fictício de R$10 por dezena
-                const mensagem = `rifa de Dezena 5.00 para 400 faca o pagamento para vailidar: Você selecionou as dezenas: ${numerosSelecionados.join(', ')}. O total a pagar é R$ ${totalAPagar},00. https://rifa-de-dezena-5.webnode.page/`;
+                const mensagem = `rifa de Dezena  EXTRACAO 10:00 HORAS 5.00 para 400 faca o pagamento para vailidar: Você selecionou as dezenas: ${numerosSelecionados.join(', ')}. O total a pagar é R$ ${totalAPagar},00. https://rifa-de-dezena-5.webnode.page/`;
 
                 // Abrir modal com a chave PIX
                 const modal = document.getElementById('myModal');
