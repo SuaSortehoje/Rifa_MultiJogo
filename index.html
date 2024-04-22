@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <img src="" h>
+    <img src="">
     <title>Rifa de 100 Dezenas</title>
       <style>
         body {
@@ -14,6 +14,8 @@
 
         h1, h2 {
             text-align: center;
+            
+            
         }
 
         #rifa {
@@ -39,12 +41,14 @@
 
         button {
             display: block;
-            margin: 20px auto;
+            margin: 10px auto;
             padding: 10px 20px;
             border: none;
             background-color: #007bff;
             color: #fff;
             cursor: pointer;
+            border-radius:12px;
+            width:50%;
         }
 
         button:hover {
@@ -72,6 +76,7 @@
             width: 80%;
             max-width: 400px;
             text-align: center;
+            outline:none
         }
 
         .close {
@@ -87,10 +92,13 @@
             text-decoration: none;
             cursor: pointer;
         }
+       totalAPagar{
+           colpr:green;
+       }
     </style>
 </head>
 <body>
-<h1>Rifa de 100 Dezenas</h1>
+<h1>Rifa Dezenas <br>R$ 5.00 PARA 400 </h1>
 <div id="rifa">
     <ul id="dezenas"></ul>
     <button id="comprarBtn">Comprar</button>
@@ -132,14 +140,14 @@ for (let i = 0; i <= 99; i++) {
         comprarBtn.addEventListener('click', () => {
             const selecionadas = document.querySelectorAll('.selected');
             if (selecionadas.length === 0) {
-                alert('Por favor, escolha pelo menos uma dezena.');
+                alert('Por favor, escolha pelo menos uma dezena da SORTE.');
             } else {
                 const numerosSelecionados = [];
                 selecionadas.forEach(li => {
                     numerosSelecionados.push(li.textContent);
                 });
                 const totalAPagar = selecionadas.length * 5; // Valor fictício de R$10 por dezena
-                const mensagem = `Você selecionou as dezenas: ${numerosSelecionados.join(', ')}. O total a pagar é R$${totalAPagar}. Use o Pix para pagar.`;
+                const mensagem = `rifa de Dezena 5.00 para 400 faca o pagamento para vailidar: Você selecionou as dezenas: ${numerosSelecionados.join(', ')}. O total a pagar é R$ ${totalAPagar},00. https://rifa-de-dezena-5.webnode.page/`;
 
                 // Abrir modal com a chave PIX
                 const modal = document.getElementById('myModal');
