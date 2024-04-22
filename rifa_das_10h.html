@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <img src="">
+    <title>Rifa de Dezenas</title>
+      <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color:black;
+            color:white;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color:
+            
+            
+        }
+
+        #rifa {
+            margin:;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: inline-block;
+            margin: 5px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        li.selected {
+            background-color: #ffcc00;
+        }
+
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            border-radius:12px;
+            width:50%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            color:white;
+        }
+
+        .modal-content {
+            background-color:black;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            outline:none
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+       totalAPagar{
+           colpr:green;
+       }
+       h {
+           color:green;
+           border-radius:10px;
+       }
+       h {
+           animation: h 1s infinite;
+       }
+       @keyframes h{ 
+           20% {background-color:red}
+           
+       }
+    </style>
+</head>
+<body>
+<h1>Rifa DEZENA<h> 10:00h </h><br>R$ 5.00 PARA 400 </h1>
+<div id="rifa">
+    <ul id="dezenas"></ul>
+    <button id="comprarBtn">Comprar</button>
+</div>
+
+<!-- Modal for Pix key -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Chave PIX: <span id="pixKey">71992290058</span></p>
+        <button onclick="copyPixKey()">Copiar</button>
+        <button id="enviarWhatsapp" style="display: none;">Enviar pelo WhatsApp</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const dezenasUl = document.getElementById('dezenas');
+        const comprarBtn = document.getElementById('comprarBtn');
+
+        // Preenche a lista de dezenas de 1 a 100
+        // Preenche a lista de dezenas de 01 a 99
+// Preenche a lista de dezenas de 00 a 99
+for (let i = 0; i <= 99; i++) {
+    const li = document.createElement('li');
+    li.textContent = i < 10 ? '0' + i : i; // Adiciona um zero à esquerda se o número for menor que 10
+    li.addEventListener('click', () => toggleSelected(li));
+    dezenasUl.appendChild(li);
+}
+
+
+
+        // Função para selecionar/deselecionar uma dezena
+        function toggleSelected(li) {
+            li.classList.toggle('selected');
+        }
+
+        // Função para comprar a rifa
+        comprarBtn.addEventListener('click', () => {
+            const selecionadas = document.querySelectorAll('.selected');
+            if (selecionadas.length === 0) {
+                alert('Por favor, escolha pelo menos uma dezena da SORTE.');
+            } else {
+                const numerosSelecionados = [];
+                selecionadas.forEach(li => {
+                    numerosSelecionados.push(li.textContent);
+                });
+                const totalAPagar = selecionadas.length * 5; // Valor fictício de R$10 por dezena
+                const mensagem = `rifa de Dezena  EXTRACAO 10:00 HORAS 5.00 para 400 faca o pagamento para vailidar: Você selecionou as dezenas: ${numerosSelecionados.join(', ')}. O total a pagar é R$ ${totalAPagar},00. https://rifa-de-dezena-5.webnode.page/`;
+
+                // Abrir modal com a chave PIX
+                const modal = document.getElementById('myModal');
+                modal.style.display = 'block';
+
+                // Mostrar botão para enviar via WhatsApp
+                const enviarWhatsappBtn = document.getElementById('enviarWhatsapp');
+                enviarWhatsappBtn.style.display = 'block';
+
+                // Gerar link para enviar via WhatsApp
+                const pixKey = document.getElementById('pixKey').innerText;
+                const numeros = numerosSelecionados.join(', ');
+                enviarWhatsappBtn.setAttribute('onclick', `sendViaWhatsApp('${pixKey}', '${mensagem}', '${numeros}')`);
+            }
+        });
+    });
+
+    // Função para copiar a chave PIX
+    function copyPixKey() {
+        const pixKey = document.getElementById('pixKey').innerText;
+        navigator.clipboard.writeText(pixKey);
+        alert('Chave PIX copiada com sucesso!');
+    }
+
+    // Função para enviar via WhatsApp
+    function sendViaWhatsApp(pixKey, mensagem, numeros) {
+        const linkWhatsApp = `https://wa.me/5571992290058?text=${encodeURIComponent(mensagem + ' ')}`;
+        window.open(linkWhatsApp, '_blank');
+    }
+
+    // Fechar modal ao clicar em (x)
+    const span = document.getElementsByClassName('close')[0];
+    span.onclick = function() {
+        const modal = document.getElementById('myModal');
+        modal.style.display = 'none';
+    }
+
+    // Fechar modal ao clicar fora dele
+    window.onclick = function(event) {
+        const modal = document.getElementById('myModal');
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+</script>
+</body>
+</html>
