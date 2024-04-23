@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Centenas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="tel"], select {
+            width: 30%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        input[type="text"], select {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #00d0ff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #00aacc;
+        }
+        #modal {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+        #modal-content {
+            background-color: black;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Jogo de Centenas</h2>
+        <input type="tel" id="valorInput" placeholder="Digite o valor (em centenas)">
+        <input type="text" id="nomeInput" placeholder="Digite seu nome">
+        <input type="tel" id="whatsappInput" placeholder="WhatsApp">
+        <select id="horarioInput">
+            <option value="10h">10h</option>
+            <option value="12h">12h</option>
+            <option value="15h">15h</option>
+            <option value="19h">19h</option>
+            <option value="21h">21h</option>
+        </select>
+        <select id="premioInput">
+            <option value="1ºpremio">Único 1º prêmio</option>
+            <option value="1ao5">1º ao 5º</option>
+        </select>
+        <input type="tel" id="centenaInput1" placeholder="Digite a centena (3 números)">
+        <input type="tel" id="centenaInput2" placeholder="Digite a centena (3 números)">
+        <input type="tel" id="centenaInput3" placeholder="Digite a centena (3 números)">
+        <input type="tel" id="centenaInput4" placeholder="Digite a centena (3 números)"><br>
+        <button onclick="adicionarCentena()">Adicionar Centena</button>
+        <button onclick="calcular()">Calcular</button>
+    </div>
+
+    <div id="modal">
+        <div id="modal-content">
+            <h3>Detalhes do Jogo</h3>
+            <p>Nome: <span id="nomePix"></span></p>
+            <p>Número do WhatsApp: <span id="whatsappPix"></span></p>
+            <p>Horário: <span id="horarioPix"></span></p>
+            <p>Centenas: <span id="centenasPix"></span></p>
+            <p>Total a pagar: R$ <span id="totalPagar"></span></p>
+            <p>Total a receber: <span id="totalReceber"></span></p>
+            <p>Código PIX: <span id="codigoPix"></span></p>
+            <button onclick="copyPix()">Copiar PIX</button>
+            <button onclick="enviarWhatsApp()">Enviar pelo WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        var centenas = [];
+
+        function adicionarCentena() {
+            var centenaInput1 = document.getElementById('centenaInput1').value;
+            var centenaInput2 = document.getElementById('centenaInput2').value;
+            var centenaInput3 = document.getElementById('centenaInput3').value;
+            var centenaInput4 = document.getElementById('centenaInput4').value;
+
+            var centenasValidas = true;
+            if (centenaInput1.length === 3 && centenaInput2.length === 3 && centenaInput3.length === 3 && centenaInput4.length === 3) {
+                centenas.push(centenaInput1);
+                centenas.push(centenaInput2);
+                centenas.push(centenaInput3);
+                centenas.push(centenaInput4);
+                alert('Centenas adicionadas com sucesso!');
+            } else {
+                alert('Por favor, digite centenas válidas (3 números em cada campo).');
+            }
+        }
+
+        function calcular() {
+            var valor = document.getElementById('valorInput').value;
+            var nome = document.getElementById('nomeInput').value;
+            var whatsapp = document.getElementById('whatsappInput').value;
+            var premio = document.getElementById('premioInput').value;
+            var horarioInput = document.getElementById('horarioInput').value;
+
+            if (valor && nome && whatsapp) {
+                valor = parseInt(valor);
+                if (!isNaN(valor)) {
+                    var total;
+                    if (premio === "1ao5") {
+                        total = valor * 700 / 5;
+                    } else {
+                        total = valor * 700;
+                    }
+                    var totalReceber = valor * centenas.length; // Multiplica o valor pelo número de centenas
+                    showModal(nome, whatsapp, horarioInput, total, totalReceber);
+                } else {
+                    alert('Por favor, digite um valor válido.');
+                }
+            } else {
+                alert('Por favor, preencha todos os campos.');
+            }
+        }
+
+        function showModal(nome, whatsapp, horario, totalPagar, totalReceber) {
+            var modal = document.getElementById('modal');
+            var nomePix = document.getElementById('nomePix');
+            var whatsappPix = document.getElementById('whatsappPix');
+            var horarioPix = document.getElementById('horarioPix');
+            var centenasPix = document.getElementById('centenasPix');
+            var totalPagarElement = document.getElementById('totalPagar');
+            var totalReceberElement = document.getElementById('totalReceber');
+            var codigoPix = document.getElementById('codigoPix');
+
+            nomePix.textContent = nome;
+            whatsappPix.textContent = whatsapp;
+            horarioPix.textContent = horario;
+            centenasPix.textContent = centenas.join(', ');
+
+            totalPagarElement.textContent = totalPagar.toFixed(2);
+            totalReceberElement.textContent = totalReceber; // Mostra o total a receber sem cálculo adicional
+
+            codigoPix.textContent = 'ed6b83b3-a790-4245-8114-cd75f8b6a9ef';
+
+            modal.style.display = 'flex';
+        }
+
+        function copyPix() {
+            var codigoPix = document.getElementById('codigoPix');
+            var range = document.createRange();
+            range.selectNode(codigoPix);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+            alert('Código PIX copiado!');
+        }
+
+        function enviarWhatsApp() {
+            var nome = document.getElementById('nomeInput').value;
+            var valor = document.getElementById('valorInput').value;
+            var premio = document.getElementById('premioInput').value;
+            var horario = document.getElementById('horarioInput').value;
+            var centenasString = centenas.join(', ');
+            var totalPagar = document.getElementById('totalPagar').textContent;
+            var totalReceber = document.getElementById('totalReceber').textContent;
+            var codigoPix = document.getElementById('codigoPix').textContent;
+
+            var mensagem = `*Olá, ${nome}!*
+            
+             *Segue o código PIX* : ${codigoPix}. 
+             
+            Valor a pagar: R$ ${totalPagar}.
+             
+            Valor a receber: R$ ${totalReceber}.
+            
+            Prêmio: ${premio}.
+            
+            Horário: ${horario}.
+            
+            Centenas: ${centenasString}`;
+
+            var mensagemEncoded = encodeURIComponent(mensagem);
+            var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
+            window.open(linkWhatsApp, '_blank');
+        }
+    </script>
+</body>
+</html>
