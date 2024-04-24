@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo de Centenas</title>
     <style>
+        /* Estilos aqui */
+        
+            <style>
         body {
             font-family: Arial, sans-serif;
             background-color: black;
@@ -68,6 +71,7 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+    
     </style>
 </head>
 <body>
@@ -75,7 +79,6 @@
         <h2>Jogo de Centenas</h2>
         <input type="tel" id="valorInput" placeholder="Digite o valor (em centenas)">
         <input type="text" id="nomeInput" placeholder="Digite seu nome">
-        <input type="tel" id="whatsappInput" placeholder="WhatsApp">
         <select id="horarioInput">
             <option value="10h">10h</option>
             <option value="12h">12h</option>
@@ -90,7 +93,9 @@
         <input type="tel" id="centenaInput1" placeholder="Digite a centena (3 números)">
         <input type="tel" id="centenaInput2" placeholder="Digite a centena (3 números)">
         <input type="tel" id="centenaInput3" placeholder="Digite a centena (3 números)">
-        <input type="tel" id="centenaInput4" placeholder="Digite a centena (3 números)"><br>
+        <input type="tel" id="centenaInput4" placeholder="Digite a centena (3 números)">
+        <input type="tel" id="centenaInput5" placeholder="Digite a centena (3 números)">
+        <br>
         <button onclick="adicionarCentena()">Adicionar Centena</button>
         <button onclick="calcular()">Calcular</button>
     </div>
@@ -99,11 +104,10 @@
         <div id="modal-content">
             <h3>Detalhes do Jogo</h3>
             <p>Nome: <span id="nomePix"></span></p>
-            <p>Número do WhatsApp: <span id="whatsappPix"></span></p>
             <p>Horário: <span id="horarioPix"></span></p>
             <p>Centenas: <span id="centenasPix"></span></p>
             <p>Total a pagar: R$ <span id="totalPagar"></span></p>
-            <p>Total a receber: <span id="totalReceber"></span></p>
+            <p>Total a receber: R$ <span id="totalReceber"></span></p>
             <p>Código PIX: <span id="codigoPix"></span></p>
             <button onclick="copyPix()">Copiar PIX</button>
             <button onclick="enviarWhatsApp()">Enviar pelo WhatsApp</button>
@@ -118,27 +122,25 @@
             var centenaInput2 = document.getElementById('centenaInput2').value;
             var centenaInput3 = document.getElementById('centenaInput3').value;
             var centenaInput4 = document.getElementById('centenaInput4').value;
+            var centenaInput5 = document.getElementById('centenaInput5').value;
 
-            var centenasValidas = true;
-            if (centenaInput1.length === 3 && centenaInput2.length === 3 && centenaInput3.length === 3 && centenaInput4.length === 3) {
-                centenas.push(centenaInput1);
-                centenas.push(centenaInput2);
-                centenas.push(centenaInput3);
-                centenas.push(centenaInput4);
-                alert('Centenas adicionadas com sucesso!');
-            } else {
-                alert('Por favor, digite centenas válidas (3 números em cada campo).');
-            }
+            centenas = []; // Limpa o array de centenas antes de adicionar novas
+            if (centenaInput1.length === 3) centenas.push(centenaInput1);
+            if (centenaInput2.length === 3) centenas.push(centenaInput2);
+            if (centenaInput3.length === 3) centenas.push(centenaInput3);
+            if (centenaInput4.length === 3) centenas.push(centenaInput4);
+            if (centenaInput5.length === 3) centenas.push(centenaInput5);
+
+            alert('Centenas adicionadas com sucesso!');
         }
 
         function calcular() {
             var valor = document.getElementById('valorInput').value;
             var nome = document.getElementById('nomeInput').value;
-            var whatsapp = document.getElementById('whatsappInput').value;
             var premio = document.getElementById('premioInput').value;
             var horarioInput = document.getElementById('horarioInput').value;
 
-            if (valor && nome && whatsapp) {
+            if (nome && valor) { // Verifica se pelo menos um nome e um valor foram inseridos
                 valor = parseInt(valor);
                 if (!isNaN(valor)) {
                     var total;
@@ -147,20 +149,19 @@
                     } else {
                         total = valor * 700;
                     }
-                    var totalReceber = valor * centenas.length; // Multiplica o valor pelo número de centenas
-                    showModal(nome, whatsapp, horarioInput, total, totalReceber);
+                    var totalPagar = valor * centenas.length; // Multiplica o valor pelo número de centenas digitadas
+                    showModal(nome, horarioInput, totalPagar, total);
                 } else {
                     alert('Por favor, digite um valor válido.');
                 }
             } else {
-                alert('Por favor, preencha todos os campos.');
+                alert('Por favor, preencha pelo menos o nome e o valor.');
             }
         }
 
-        function showModal(nome, whatsapp, horario, totalPagar, totalReceber) {
+        function showModal(nome, horario, totalPagar, totalReceber) {
             var modal = document.getElementById('modal');
             var nomePix = document.getElementById('nomePix');
-            var whatsappPix = document.getElementById('whatsappPix');
             var horarioPix = document.getElementById('horarioPix');
             var centenasPix = document.getElementById('centenasPix');
             var totalPagarElement = document.getElementById('totalPagar');
@@ -168,12 +169,11 @@
             var codigoPix = document.getElementById('codigoPix');
 
             nomePix.textContent = nome;
-            whatsappPix.textContent = whatsapp;
             horarioPix.textContent = horario;
             centenasPix.textContent = centenas.join(', ');
 
             totalPagarElement.textContent = totalPagar.toFixed(2);
-            totalReceberElement.textContent = totalReceber; // Mostra o total a receber sem cálculo adicional
+            totalReceberElement.textContent = totalReceber.toFixed(2); // Correção aqui
 
             codigoPix.textContent = 'ed6b83b3-a790-4245-8114-cd75f8b6a9ef';
 
@@ -205,9 +205,9 @@
             
              *Segue o código PIX* : ${codigoPix}. 
              
-            Valor a pagar: R$ ${totalPagar}.
-             
-            Valor a receber: R$ ${totalReceber}.
+            Valor a pagar: R$ ${totalReceber}. // Correção aqui
+            
+            Valor a receber: R$ ${totalPagar}. // Correção aqui
             
             Prêmio: ${premio}.
             
