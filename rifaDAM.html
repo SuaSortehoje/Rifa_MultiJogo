@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rifa de Dezenas</title>
-    <style>
+     <style>
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(60deg, purple, purple);
@@ -103,6 +103,8 @@
 <h1>Rifa DEZENA</h1>
 <div id="rifa">
     <ul id="dezenas"></ul>
+    <input type="number" id="valorPorDezena" placeholder="Valor por dezena (R$)">
+    <input type="text" id="whatsappName" placeholder="Nome do destinatário">
     <select id="horarioSelect">
         <option value="10:00">10:00h</option>
         <option value="12:00">12:00h</option>
@@ -113,20 +115,21 @@
     <button id="comprarBtn">Comprar</button>
 </div>
 
-<!-- Modal para a chave PIX -->
+<!-- Modal para a chave PIX e WhatsApp -->
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         <p>Chave PIX: <span id="pixKey">71992290058</span></p>
         <p>Valor a pagar: R$ <span id="valorPagar"></span></p>
-        <p>Valor a receber: R$ <span id="valorReceber">A definir</span></p>
+        <p>Valor a receber: R$ <span id="valorReceber"></span></p>
         <p>Horário: <span id="horario">10:00</span></p>
         <p>Dezenas selecionadas: <span id="dezenasSelecionadas"></span></p>
+        <button id="enviarWhatsApp">Enviar pelo WhatsApp</button>
         <button onclick="copyPixKey()">Copiar</button>
-        <button id="enviarWhatsapp">Enviar pelo WhatsApp</button>
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const dezenasUl = document.getElementById('dezenas');
@@ -151,17 +154,50 @@
             if (selecionadas.length === 0) {
                 alert('Por favor, escolha pelo menos uma dezena da SORTE.');
             } else {
+                const valorPorDezena = parseFloat(document.getElementById('valorPorDezena').value);
                 const totalDezenas = selecionadas.length;
-                const valorPorDezena = 5; // Valor fictício de R$5 por dezena
                 const totalAPagar = totalDezenas * valorPorDezena;
                 const totalPagar = totalAPagar.toFixed(2);
+                const valorAReceber = (totalAPagar * 80).toFixed(2);
                 const dezenasArray = Array.from(selecionadas).map(li => li.textContent);
                 const dezenasSelecionadas = dezenasArray.join(', ');
                 const modal = document.getElementById('myModal');
                 document.getElementById('valorPagar').textContent = totalPagar;
+                document.getElementById('valorReceber').textContent = valorAReceber;
                 document.getElementById('dezenasSelecionadas').textContent = dezenasSelecionadas;
                 modal.style.display = 'block';
             }
+        });
+
+        document.getElementById('enviarWhatsApp').addEventListener('click', function () {
+            const nome = document.getElementById('whatsappName').value;
+            const titulo = "MULTIJOGO";
+            const codigoPix = document.getElementById('pixKey').innerText;
+            const totalReceber = document.getElementById('valorPagar').innerText;
+            const totalPagar = document.getElementById('valorReceber').innerText;
+            const premio = "PRÊMIO"; // Coloque o prêmio desejado aqui
+            const horario = document.getElementById('horario').innerText;
+            const centenasString = document.getElementById('dezenasSelecionadas').innerText;
+
+            var mensagem = `*${titulo}*
+            
+                            *Olá, ${nome}!*
+            
+                            *Segue o código PIX* : ${codigoPix}. 
+                            
+                            Valor a pagar: R$ ${totalReceber}.
+                            
+                            Valor a receber: R$ ${totalPagar}.
+                            
+                            Prêmio: ${premio}.
+                            
+                            Horário: ${horario}.
+                            
+                            Centenas: ${centenasString}`;
+
+            var mensagemEncoded = encodeURIComponent(mensagem);
+            var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
+            window.open(linkWhatsApp, '_blank');
         });
     });
 
@@ -173,35 +209,18 @@
 
     const span = document.getElementsByClassName('close')[0];
     span.onclick = function () {
-        const modal = document.getElementById('myModal');
-        modal.style.display = 'none';
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => modal.style.display = 'none');
     };
 
     window.onclick = function (event) {
-        const modal = document.getElementById('myModal');
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
     };
-
-    document.getElementById('enviarWhatsapp').addEventListener('click', function () {
-        const nome = "Nome"; // Nome do comprador
-        const pixKey = document.getElementById('pixKey').innerText;
-        const valorPagar = document.getElementById('valorPagar').innerText;
-        const valorReceber = document.getElementById('valorReceber').innerText;
-        const horario = document.getElementById('horario').innerText;
-        const dezenasSelecionadas = document.getElementById('dezenasSelecionadas').innerText;
-
-        const mensagem = encodeURIComponent('*Olá, ' + nome + '!*\n\n' +
-            '*Segue o código PIX*: ' + pixKey + '\n\n' +
-            'Valor a pagar: R$ ' + valorPagar + '\n\n' +
-            'Valor a receber: R$ ' + valorReceber + '\n\n' +
-            'Horário: ' + horario + '\n\n' +
-            'Dezenas selecionadas: ' + dezenasSelecionadas + '\n\n');
-
-        const linkWhatsApp = 'https://api.whatsapp.com/send?text=' + mensagem;
-        window.open(linkWhatsApp, '_blank');
-    });
 </script>
 </body>
 </html>
