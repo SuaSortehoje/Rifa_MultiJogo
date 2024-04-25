@@ -154,61 +154,63 @@
         }
 
         comprarBtn.addEventListener('click', () => {
-    const selecionadas = document.querySelectorAll('.selected');
-    if (selecionadas.length === 0) {
-        alert('Por favor, escolha pelo menos uma dezena da SORTE.');
-    } else {
-        const valorPorDezena = parseFloat(document.getElementById('valorPorDezena').value);
-        const premio = parseFloat(premioSelect.value);
-        const totalDezenas = selecionadas.length;
-        let totalAPagar = totalDezenas * valorPorDezena;
-        let valorAReceber = totalAPagar * 80;
-        if (premio === 5) {
-            valorAReceber /= 5; // Divide o valor a receber por 5 se a opção for "1º ao 5º Prêmio"
-        }
-        const totalPagar = totalAPagar.toFixed(2);
-        valorAReceber = valorAReceber.toFixed(2);
-        const dezenasArray = Array.from(selecionadas).map(li => li.textContent);
-        const dezenasSelecionadas = dezenasArray.join(', ');
-        const modal = document.getElementById('myModal');
-        document.getElementById('valorPagar').textContent = totalPagar;
-        document.getElementById('valorReceber').textContent = valorAReceber;
-        document.getElementById('dezenasSelecionadas').textContent = dezenasSelecionadas;
-        modal.style.display = 'block';
-    }
-});
+            const selecionadas = document.querySelectorAll('.selected');
+            if (selecionadas.length === 0) {
+                alert('Por favor, escolha pelo menos uma dezena da SORTE.');
+            } else {
+                const valorPorDezena = parseFloat(document.getElementById('valorPorDezena').value);
+                const premio = parseFloat(premioSelect.value);
+                const horario = horarioSelect.value;
+                const totalDezenas = selecionadas.length;
+                let totalAPagar = totalDezenas * valorPorDezena;
+                let valorAReceber = totalAPagar * 80;
+                if (premio === 5) {
+                    valorAReceber /= 5; // Divide o valor a receber por 5 se a opção for "1º ao 5º Prêmio"
+                }
+                const totalPagar = totalAPagar.toFixed(2);
+                valorAReceber = valorAReceber.toFixed(2);
+                const dezenasArray = Array.from(selecionadas).map(li => li.textContent);
+                const dezenasSelecionadas = dezenasArray.join(', ');
+                const modal = document.getElementById('myModal');
+                document.getElementById('valorPagar').textContent = totalPagar;
+                document.getElementById('valorReceber').textContent = valorAReceber;
+                document.getElementById('dezenasSelecionadas').textContent = dezenasSelecionadas;
+                document.getElementById('horario').textContent = horario;
+                modal.style.display = 'block';
+            }
+        });
 
-      document.getElementById('enviarWhatsApp').addEventListener('click', function () {
-    const nome = document.getElementById('whatsappName').value;
-    const titulo = "MULTIJOGO";
-    const codigoPix = document.getElementById('pixKey').innerText;
-    const totalReceber = document.getElementById('valorPagar').innerText;
-    const totalPagar = document.getElementById('valorReceber').innerText;
-    const premioSelect = document.getElementById('premioSelect');
-    const premio = premioSelect.options[premioSelect.selectedIndex].text;
-    const horario = document.getElementById('horario').innerText;
-    const dezenasString = document.getElementById('dezenasSelecionadas').innerText;
+        document.getElementById('enviarWhatsApp').addEventListener('click', function () {
+            const nome = document.getElementById('whatsappName').value;
+            const titulo = "MULTIJOGO";
+            const codigoPix = document.getElementById('pixKey').innerText;
+            const totalReceber = document.getElementById('valorPagar').innerText;
+            const totalPagar = document.getElementById('valorReceber').innerText;
+            const premioSelect = document.getElementById('premioSelect');
+            const premio = premioSelect.options[premioSelect.selectedIndex].text;
+            const horario = document.getElementById('horario').innerText;
+            const dezenasString = document.getElementById('dezenasSelecionadas').innerText;
 
-    var mensagem = `*${titulo}*
-        
-                    *Olá, ${nome}!*
-        
-                    *Segue o código PIX* : ${codigoPix}. 
-                    
-                    Valor a pagar: R$ ${totalReceber}.
-                    
-                    Valor a receber: R$ ${totalPagar}.
-                    
-                    Prêmio: ${premio}.
-                    
-                    Horário: ${horario}.
-                    
-                    Dezenas: ${dezenasString}`;
+            var mensagem = `*${titulo}*
+                
+                            *Olá, ${nome}!*
+                
+                            *Segue o código PIX* : ${codigoPix}. 
+                            
+                            Valor a pagar: R$ ${totalReceber}.
+                            
+                            Valor a receber: R$ ${totalPagar}.
+                            
+                            Prêmio: ${premio}.
+                            
+                            Horário: ${horario}.
+                            
+                            Dezenas: ${dezenasString}`;
 
-    var mensagemEncoded = encodeURIComponent(mensagem);
-    var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
-    window.open(linkWhatsApp, '_blank');
-});
+            var mensagemEncoded = encodeURIComponent(mensagem);
+            var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
+            window.open(linkWhatsApp, '_blank');
+        });
 
     });
 
