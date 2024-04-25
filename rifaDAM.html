@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rifa de Dezenas</title>
-    <style>
+   <style>
         body {
             font-family: Arial, sans-serif;
             background: black;
@@ -97,19 +97,38 @@
                 background-color: red
             }
         }
+   .vDezenas{
+       
+       margin-left:0;
+       width:20%;
+       height:30px;
+       border-radius:10px;
+   }
+   .nome  {
+       
+       margin:5px auto;
+       width:50%;
+       height:30px;
+       border-radius:10px;
+   }
+   .sele{
+       width:30%;
+       height:30px;
+   }
     </style>
 </head>
 <body>
 <h1>Rifa DEZENA</h1>
 <div id="rifa">
     <ul id="dezenas"></ul>
-    <input type="number" id="valorPorDezena" placeholder="Valor por dezena (R$)">
-    <input type="text" id="whatsappName" placeholder="Nome do destinatário">
-    <select id="premioSelect">
+    <input type="number" class="vDezenas" id="valorPorDezena" placeholder="(R$)">
+    <input type="text" class="nome"id="whatsappName" placeholder="Nome do destinatário">
+    
+    <select class="sele"  id="premioSelect">
         <option value="1">1º Prêmio</option>
         <option value="5">1º ao 5º Prêmio</option>
     </select>
-    <select id="horarioSelect">
+    <select class="sele" id="horarioSelect">
         <option value="10:00">10:00h</option>
         <option value="12:00">12:00h</option>
         <option value="15:00">15:00h</option>
@@ -125,8 +144,8 @@
         <span class="close">&times;</span>
         <p>Chave PIX: <span id="pixKey">71992290058</span></p>
         <p>Valor a pagar: R$ <span id="valorPagar"></span></p>
-        <p>Valor a receber: R$ <span id="valorReceber"></span></p>
-        <p>Horário: <span id="horario">10:00</span></p>
+        <p>Valor a receber por dezena: R$ <span id="valorReceber"></span></p>
+        <p>Horário: <span id="horario">EXTRACAO</span></p>
         <p>Dezenas selecionadas: <span id="dezenasSelecionadas"></span></p>
         <button id="enviarWhatsApp">Enviar pelo WhatsApp</button>
         <button onclick="copyPixKey()">Copiar</button>
@@ -166,6 +185,8 @@
                 let valorAReceber = totalAPagar * 80;
                 if (premio === 5) {
                     valorAReceber /= 5; // Divide o valor a receber por 5 se a opção for "1º ao 5º Prêmio"
+                } else {
+                    valorAReceber /= totalDezenas; // Divide o valor a receber pelo número total de dezenas selecionadas
                 }
                 const totalPagar = totalAPagar.toFixed(2);
                 valorAReceber = valorAReceber.toFixed(2);
