@@ -124,7 +124,7 @@
             var centenaInput4 = document.getElementById('centenaInput4').value;
             var centenaInput5 = document.getElementById('centenaInput5').value;
 
-            centenas = []; // Limpa o array de centenas antes de adicionar novas
+            centenas = []; 
             if (centenaInput1.length === 3) centenas.push(centenaInput1);
             if (centenaInput2.length === 3) centenas.push(centenaInput2);
             if (centenaInput3.length === 3) centenas.push(centenaInput3);
@@ -140,7 +140,7 @@
             var premio = document.getElementById('premioInput').value;
             var horarioInput = document.getElementById('horarioInput').value;
 
-            if (nome && valor) { // Verifica se pelo menos um nome e um valor foram inseridos
+            if (nome && valor) { 
                 valor = parseInt(valor);
                 if (!isNaN(valor)) {
                     var total;
@@ -149,7 +149,7 @@
                     } else {
                         total = valor * 700;
                     }
-                    var totalPagar = valor * centenas.length; // Multiplica o valor pelo número de centenas digitadas
+                    var totalPagar = valor * centenas.length; 
                     showModal(nome, horarioInput, totalPagar, total);
                 } else {
                     alert('Por favor, digite um valor válido.');
@@ -173,7 +173,7 @@
             centenasPix.textContent = centenas.join(', ');
 
             totalPagarElement.textContent = totalPagar.toFixed(2);
-            totalReceberElement.textContent = totalReceber.toFixed(2); // Correção aqui
+            totalReceberElement.textContent = totalReceber.toFixed(2); 
 
             codigoPix.textContent = 'ed6b83b3-a790-4245-8114-cd75f8b6a9ef';
 
@@ -205,9 +205,9 @@
             
              *Segue o código PIX* : ${codigoPix}. 
              
-            Valor a pagar: R$ ${totalReceber}. // Correção aqui
+            Valor a pagar: R$ ${totalReceber}.
             
-            Valor a receber: R$ ${totalPagar}. // Correção aqui
+            Valor a receber: R$ ${totalPagar}.
             
             Prêmio: ${premio}.
             
