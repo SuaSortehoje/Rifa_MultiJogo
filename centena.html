@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo de Centenas</title>
-    
-            <style>
+     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: black;
@@ -168,8 +167,7 @@
 
             nomePix.textContent = nome;
             horarioPix.textContent = horario;
-            centenasPix.textContent = centenas.join(', ');
-
+            centenasPix.textContent = formatarCentenas(centenas);
             totalPagarElement.textContent = totalPagar.toFixed(2);
             totalReceberElement.textContent = totalReceber.toFixed(2); 
 
@@ -190,32 +188,45 @@
         }
 
         function enviarWhatsApp() {
+            const titulo = "MULTIJOGO RIFA DE CENTENA";
             var nome = document.getElementById('nomeInput').value;
-            var valor = document.getElementById('valorInput').value;
             var premio = document.getElementById('premioInput').value;
             var horario = document.getElementById('horarioInput').value;
-            var centenasString = centenas.join(', ');
+            var centenasString = formatarCentenas(centenas);
             var totalPagar = document.getElementById('totalPagar').textContent;
             var totalReceber = document.getElementById('totalReceber').textContent;
             var codigoPix = document.getElementById('codigoPix').textContent;
 
-            var mensagem = `*Olá, ${nome}!*
+            var mensagem = `*${titulo}*
             
-             *Segue o código PIX* : ${codigoPix}. 
+            *Olá, ${nome}!*
+            
+            *Segue o código PIX:* ${codigoPix}. 
              
-            Valor a pagar: R$ ${totalReceber}.
+            *Valor a receber:* R$ ${totalReceber}.
             
-            Valor a receber: R$ ${totalPagar}.
+            *Valor a pagar:* R$ ${totalPagar}.
             
-            Prêmio: ${premio}.
+            *Prêmio:* ${premio}.
             
-            Horário: ${horario}.
+            *Horário:* ${horario}.
             
-            Centenas: ${centenasString}`;
+            *Centenas:* ${centenasString}`;
 
             var mensagemEncoded = encodeURIComponent(mensagem);
             var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
             window.open(linkWhatsApp, '_blank');
+        }
+
+        // Função para formatar as centenas
+        function formatarCentenas(centenas) {
+            var centenasFormatadas = "";
+            for (var i = 0; i < centenas.length; i++) {
+                centenasFormatadas += "(" + centenas[i] + "), ";
+            }
+            // Remover a vírgula extra no final
+            centenasFormatadas = centenasFormatadas.slice(0, -2);
+            return centenasFormatadas;
         }
     </script>
 </body>
