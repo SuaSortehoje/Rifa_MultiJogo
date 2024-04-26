@@ -122,7 +122,7 @@
             duquesDeDezena.push(duqueDeDezena);
             alert('Duque de Dezena adicionado com sucesso!');
             
-            // Limpar os campos de entrada
+           
             document.getElementById('duqueInput1').value = '';
             document.getElementById('duqueInput2').value = '';
         } else {
@@ -205,7 +205,7 @@
         var selecionadoPremio = document.getElementById('premioInput');
         var premioText = selecionadoPremio.options[selecionadoPremio.selectedIndex].text;
 
-        var multijogo = "MULTIJOGO\n\n";
+        var multijogo = "MULTIJOGO DUQUE DE DEZENA\n\n";
 
         var mensagem = `${multijogo}*Olá, ${nome}!*\n\n*Segue o código PIX*: ${codigoPix}.\n\nValor a receber: R$ ${totalReceber}.\n\nValor a receber: R$ ${totalPagar}.\n\nPrêmio: ${premioText}.\n\nHorário: ${horarioText}.\n\nDuques de Dezena: ${duquesDeDezenaString}`;
 
