@@ -54,7 +54,7 @@
             background-color: #0056b3;
         }
 
-        /* Modal styles */
+
         .modal {
             display: none;
             position: fixed;
@@ -182,11 +182,11 @@
                 const horario = horarioSelect.value;
                 const totalGrupos = selecionados.length;
                 let totalAPagar = totalGrupos * valorPorGrupo;
-                let valorAReceber = totalAPagar * 18; // Cada 1 real vale 18 no jogo
+                let valorAReceber = totalAPagar * 18; 
                 if (premio === 5) {
-                    valorAReceber /= 5; // Divide o valor a receber por 5 se a opção for "1º ao 5º Prêmio"
+                    valorAReceber /= 5; 
                 } else {
-                    valorAReceber /= totalGrupos; // Divide o valor a receber pelo número total de grupos selecionados
+                    valorAReceber /= totalGrupos; 
                 }
                 const totalPagar = totalAPagar.toFixed(2);
                 valorAReceber = valorAReceber.toFixed(2);
@@ -203,7 +203,7 @@
 
         document.getElementById('enviarWhatsApp').addEventListener('click', function () {
             const nome = document.getElementById('whatsappName').value;
-            const titulo = "MULTIJOGO";
+            const titulo = "MULTIJOGO RIFA DE GRUPO";
             const codigoPix = document.getElementById('pixKey').innerText;
             const totalReceber = document.getElementById('valorPagar').innerText;
             const totalPagar = document.getElementById('valorReceber').innerText;
