@@ -114,19 +114,11 @@
         var milhares = [];
 
         function adicionarMilhar() {
-            var milharInput1 = document.getElementById('milharInput1').value;
-            var milharInput2 = document.getElementById('milharInput2').value;
-            var milharInput3 = document.getElementById('milharInput3').value;
-            var milharInput4 = document.getElementById('milharInput4').value;
-            var milharInput5 = document.getElementById('milharInput5').value;
-
+            var milharInputs = document.querySelectorAll('[id^="milharInput"]');
             milhares = []; // Limpa o array de milhares antes de adicionar novos
-            if (milharInput1.length === 4) milhares.push(milharInput1);
-            if (milharInput2.length === 4) milhares.push(milharInput2);
-            if (milharInput3.length === 4) milhares.push(milharInput3);
-            if (milharInput4.length === 4) milhares.push(milharInput4);
-            if (milharInput5.length === 4) milhares.push(milharInput5);
-
+            milharInputs.forEach(function(input) {
+                if (input.value.length === 4) milhares.push(`(${input.value})`);
+            });
             alert('Milhares adicionados com sucesso!');
         }
 
@@ -197,19 +189,12 @@
             var totalReceber = document.getElementById('totalReceber').textContent;
             var codigoPix = document.getElementById('codigoPix').textContent;
 
-            var mensagem = `*Olá, ${nome}!*
-            
-             *Segue o código PIX* : ${codigoPix}. 
-             
-            Valor a pagar: R$ ${totalReceber}. // Correção aqui
-            
-            Valor a receber: R$ ${totalPagar}. // Correção aqui
-            
-            Prêmio: ${premio}.
-            
-            Horário: ${horario}.
-            
-            Milhares: ${milharesString}`;
+            var selecionado = document.getElementById('premioInput');
+            var premioText = selecionado.options[selecionado.selectedIndex].text;
+
+            var multijogo = "MULTIJOGO RIFA DE MILHAR\n\n";
+
+            var mensagem = `${multijogo}*Olá, ${nome}!*\n\n*Segue o código PIX*: ${codigoPix}.\n\nValor a pagar: R$ ${totalReceber}.\n\nValor a receber: R$ ${totalPagar}.\n\nPrêmio: ${premioText}.\n\nHorário: ${horario}.\n\nMilhares: ${milharesString}`;
 
             var mensagemEncoded = encodeURIComponent(mensagem);
             var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
@@ -218,4 +203,3 @@
     </script>
 </body>
 </html>
- 
