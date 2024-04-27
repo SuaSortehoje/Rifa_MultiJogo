@@ -54,7 +54,7 @@
             background-color: #0056b3;
         }
 
-
+        /* Modal styles */
         .modal {
             display: none;
             position: fixed;
@@ -91,8 +91,8 @@
             text-decoration: none;
             cursor: pointer;
         }
-
-        @keyframes h {
+h1{animation:h1 1s infinite}
+        @keyframes h1{
             20% {
                 background-color: red
             }
@@ -115,10 +115,16 @@
        width:30%;
        height:30px;
    }
+ .jogoBicho {
+     width:100%;
+     height:140px;
+     border:1px solid:red
+ }  
     </style>
 </head>
 <body>
 <h1>Rifa GRUPOS</h1>
+<img  src="jogoBicho.jpeg" alt="jogo"class="jogoBicho">
 <div id="rifa">
     <ul id="grupos"></ul>
     <input type="number" class="vDezenas" id="valorPorGrupo" placeholder="(R$)">
@@ -182,11 +188,11 @@
                 const horario = horarioSelect.value;
                 const totalGrupos = selecionados.length;
                 let totalAPagar = totalGrupos * valorPorGrupo;
-                let valorAReceber = totalAPagar * 18; 
+                let valorAReceber = totalAPagar * 18; // Cada 1 real vale 18 no jogo
                 if (premio === 5) {
-                    valorAReceber /= 5; 
+                    valorAReceber /= 5; // Divide o valor a receber por 5 se a opção for "1º ao 5º Prêmio"
                 } else {
-                    valorAReceber /= totalGrupos; 
+                    valorAReceber /= totalGrupos; // Divide o valor a receber pelo número total de grupos selecionados
                 }
                 const totalPagar = totalAPagar.toFixed(2);
                 valorAReceber = valorAReceber.toFixed(2);
