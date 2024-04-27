@@ -202,36 +202,40 @@
         });
 
         document.getElementById('enviarWhatsApp').addEventListener('click', function () {
-            const nome = document.getElementById('whatsappName').value;
-            const titulo = "MULTIJOGO";
-            const codigoPix = document.getElementById('pixKey').innerText;
-            const totalReceber = document.getElementById('valorPagar').innerText;
-            const totalPagar = document.getElementById('valorReceber').innerText;
-            const premioSelect = document.getElementById('premioSelect');
-            const premio = premioSelect.options[premioSelect.selectedIndex].text;
-            const horario = document.getElementById('horario').innerText;
-            const dezenasString = document.getElementById('dezenasSelecionadas').innerText;
+    const nome = document.getElementById('whatsappName').value;
+    const titulo = "MULTIJOGO RIFA DE DEZENA";
+    const codigoPix = document.getElementById('pixKey').innerText;
+    const totalReceber = document.getElementById('valorPagar').innerText;
+    const totalPagar = document.getElementById('valorReceber').innerText;
+    const premioSelect = document.getElementById('premioSelect');
+    const premio = premioSelect.options[premioSelect.selectedIndex].text;
+    const horario = document.getElementById('horario').innerText;
+    const dezenasString = document.getElementById('dezenasSelecionadas').innerText;
+    const linkRifa = "https://rifa-de-dezena-5.webnode.page/";
 
-            var mensagem = `*${titulo}*
-                
-                            *Olá, ${nome}!*
-                
-                            *Segue o código PIX* : ${codigoPix}. 
-                            
-                            Valor a pagar: R$ ${totalReceber}.
-                            
-                            Valor a receber: R$ ${totalPagar}.
-                            
-                            Prêmio: ${premio}.
-                            
-                            Horário: ${horario}.
-                            
-                            Dezenas: ${dezenasString}`;
+    var mensagem = `*${titulo}*
+        
+                    *Olá, ${nome}!*
+        
+             *Segue o código PIX* : ${codigoPix}. 
+                    
+                    Valor a pagar: R$ ${totalReceber}.
+                    
+                    Valor a receber: R$ ${totalPagar}.
+                    
+                    Prêmio: ${premio}.
+                    
+                    Horário: ${horario}.
+                    
+                    Dezenas: ${dezenasString}.
+                    
+                   ${linkRifa}`;
 
-            var mensagemEncoded = encodeURIComponent(mensagem);
-            var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
-            window.open(linkWhatsApp, '_blank');
-        });
+    var mensagemEncoded = encodeURIComponent(mensagem);
+    var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
+    window.open(linkWhatsApp, '_blank');
+});
+
 
     });
 
