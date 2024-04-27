@@ -219,17 +219,17 @@
         
              *Segue o código PIX* : ${codigoPix}. 
                     
-                    Valor a pagar: R$ ${totalReceber}.
+                    *Valor a pagar* : R$ ${totalReceber}.
                     
-                    Valor a receber: R$ ${totalPagar}.
+                    *Valor a receber* : R$ ${totalPagar}.
                     
-                    Prêmio: ${premio}.
+                    *Prêmio* : ${premio}.
                     
-                    Horário: ${horario}.
+                    *Horário* : ${horario}.
                     
-                    Dezenas: ${dezenasString}.
+                    *Dezenas* : ${dezenasString}.
                     
-                   ${linkRifa}`;
+      ${linkRifa}`;
 
     var mensagemEncoded = encodeURIComponent(mensagem);
     var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
