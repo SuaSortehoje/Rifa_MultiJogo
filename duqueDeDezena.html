@@ -143,7 +143,7 @@
                 if (premio === "1a5premio") {
                     total = valor * 300;
                 } else if (premio === "6a10premio") {
-                    total = valor * 300 / 10;
+                    total = valor * 300 ;
                 } else {
                     total = valor * 300;
                 }
@@ -206,8 +206,12 @@
         var premioText = selecionadoPremio.options[selecionadoPremio.selectedIndex].text;
 
         var multijogo = "MULTIJOGO DUQUE DE DEZENA\n\n";
+        
+        const linkDuqueDedezenas = "https://rifa-de-dezena-5.webnode.page/sobre-mim/";
 
-        var mensagem = `${multijogo}*Olá, ${nome}!*\n\n*Segue o código PIX*: ${codigoPix}.\n\nValor a receber: R$ ${totalReceber}.\n\nValor a receber: R$ ${totalPagar}.\n\nPrêmio: ${premioText}.\n\nHorário: ${horarioText}.\n\nDuques de Dezena: ${duquesDeDezenaString}`;
+        var mensagem = `${linkDuqueDedezenas}
+        
+        ${multijogo}*Olá, ${nome}!*\n\n*Segue o código PIX* : ${codigoPix}\n\nValor a receber : R$ ${totalReceber}\n\nValor a receber : R$ ${totalPagar}\n\nPrêmio : ${premioText}\n\nHorário : ${horarioText}.\n\nDuques de Dezena: ${duquesDeDezenaString}`;
 
         var mensagemEncoded = encodeURIComponent(mensagem);
         var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
