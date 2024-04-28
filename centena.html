@@ -189,6 +189,7 @@
 
         function enviarWhatsApp() {
             const titulo = "MULTIJOGO RIFA DE CENTENA";
+            const linkCentena ="https://rifa-de-dezena-5.webnode.page/meu-trabalho/";
             var nome = document.getElementById('nomeInput').value;
             var premio = document.getElementById('premioInput').value;
             var horario = document.getElementById('horarioInput').value;
@@ -197,21 +198,23 @@
             var totalReceber = document.getElementById('totalReceber').textContent;
             var codigoPix = document.getElementById('codigoPix').textContent;
 
-            var mensagem = `*${titulo}*
+            var mensagem = `${linkCentena}
+           
+            *${titulo}*
             
             *Olá, ${nome}!*
             
-            *Segue o código PIX:* ${codigoPix}. 
+            *Segue o código PIX :* ${codigoPix} 
              
-            *Valor a receber:* R$ ${totalReceber}.
+            *Valor a receber :* R$ ${totalReceber}
             
-            *Valor a pagar:* R$ ${totalPagar}.
+            *Valor a pagar :* R$ ${totalPagar}
             
-            *Prêmio:* ${premio}.
+            *Prêmio :* ${premio}
             
-            *Horário:* ${horario}.
+            *Horário :* ${horario}
             
-            *Centenas:* ${centenasString}`;
+            *Centenas :* ${centenasString}`;
 
             var mensagemEncoded = encodeURIComponent(mensagem);
             var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
