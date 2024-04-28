@@ -194,7 +194,23 @@
 
             var multijogo = "MULTIJOGO RIFA DE MILHAR\n\n";
 
-            var mensagem = `${multijogo}*Olá, ${nome}!*\n\n*Segue o código PIX*: ${codigoPix}.\n\nValor a pagar: R$ ${totalReceber}.\n\nValor a receber: R$ ${totalPagar}.\n\nPrêmio: ${premioText}.\n\nHorário: ${horario}.\n\nMilhares: ${milharesString}`;
+const linkMilhar="https://rifa-de-dezena-5.webnode.page/meu-trabalho/o-grande-dia/";
+            var mensagem = `${linkMilhar}
+            
+       ${multijogo}          *Olá,* ${nome}!
+            
+            *Segue o código PIX :*
+             ${codigoPix}
+            
+            *Valor a pagar : R$* ${totalReceber}
+            
+            *Valor a receber : R$* ${totalPagar}
+            
+            *Prêmio :* ${premioText}
+            
+            *Horário :* ${horario}
+            
+            *Milhares :* ${milharesString}`;
 
             var mensagemEncoded = encodeURIComponent(mensagem);
             var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
