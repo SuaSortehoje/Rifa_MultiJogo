@@ -83,7 +83,7 @@
             <option value="21h">21h</option>
         </select>
         <select id="premioInput">
-            <option value="premio">Prêmio</option>
+            <option value="premio">1º Prêmio</option>
             <option value="1a5premio">1º ao 5º Prêmio</option>
         </select>
         <input type="tel" id="milharInput1" placeholder="Digite a milhar (4 números)" maxlength="4">
@@ -210,7 +210,7 @@ const linkMilhar="https://https://rifa-de-dezena-5.webnode.page/contato/";
             
             *Horário :* ${horario}
             
-            *Milhares :* ${milharesString}`;
+            *Milhares e Centena :* ${milharesString}`;
 
             var mensagemEncoded = encodeURIComponent(mensagem);
             var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
