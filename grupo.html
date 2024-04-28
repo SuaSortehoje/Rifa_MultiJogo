@@ -98,20 +98,32 @@ h1{animation:h1 1s infinite}
                 background-color: red
             }
         }
-         .vDezenas{
-       
+    .vDezenas{
        margin-left:0;
        width:20%;
-       height:30px;
+       height:20px;
        border-radius:10px;
+       text-align: center;
+       outline:none;
+       
+   }
+   .vDezenas:focus {
+       background:black;
+       color:white;
    }
    .nome  {
        
        margin:5px auto;
        width:50%;
-       height:30px;
+       height:20px;
        border-radius:10px;
+       outline:none;
+       text-align: center;
    }
+ .nome:focus {
+     background:black;
+     color:white;
+ }
    .sele{
        width:30%;
        height:30px;
@@ -128,7 +140,7 @@ h1{animation:h1 1s infinite}
 <img  src="jogoBicho.jpeg" alt="jogo"class="jogoBicho">
 <div id="rifa">
     <ul id="grupos"></ul>
-    <input type="number" class="vDezenas" id="valorPorGrupo" placeholder="(R$)">
+    <input type="number" class="vDezenas" id="valorPorGrupo" placeholder="">
     <input type="text" class="nome" id="whatsappName" placeholder="Nome do destinatário">
 
     <select class="sele" id="premioSelect">
