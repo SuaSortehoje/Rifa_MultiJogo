@@ -210,6 +210,7 @@ h1{animation:h1 1s infinite}
         document.getElementById('enviarWhatsApp').addEventListener('click', function () {
             const nome = document.getElementById('whatsappName').value;
             const titulo = "MULTIJOGO RIFA DE GRUPO";
+            const linkGrupo = "https://rifa-de-dezena-5.webnode.page/meu-trabalho/retratos-dos-sonhos/";
             const codigoPix = document.getElementById('pixKey').innerText;
             const totalReceber = document.getElementById('valorPagar').innerText;
             const totalPagar = document.getElementById('valorReceber').innerText;
@@ -218,21 +219,23 @@ h1{animation:h1 1s infinite}
             const horario = document.getElementById('horario').innerText;
             const gruposString = document.getElementById('gruposSelecionados').innerText;
 
-            var mensagem = `*${titulo}*
+            var mensagem = `${linkGrupo}
+            
+     *${titulo}*
 
-                            *Olá, ${nome}!*
+                     *Olá, ${nome}!*
 
-                            *Segue o código PIX* : ${codigoPix}. 
+         *Segue o código PIX :* ${codigoPix} 
                             
-                            Valor a pagar: R$ ${totalReceber}.
+                     *Valor a pagar : R$* ${totalReceber}
                             
-                            Valor a receber: R$ ${totalPagar}.
+                     *Valor a receber : R$* ${totalPagar}
                             
-                            Prêmio: ${premio}.
+                     *Prêmio :* ${premio}
                             
-                            Horário: ${horario}.
+                     *Horário :* ${horario}
                             
-                            Grupos: ${gruposString}`;
+*Grupos :* *${gruposString}* `;
 
             var mensagemEncoded = encodeURIComponent(mensagem);
             var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
