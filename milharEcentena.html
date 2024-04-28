@@ -199,18 +199,17 @@ const linkMilhar="https://https://rifa-de-dezena-5.webnode.page/contato/";
             
        ${multijogo}          *Olá,* ${nome}!
             
-            *Segue o código PIX :*
-             ${codigoPix}
+       *Segue o código PIX :*${codigoPix}
             
-            *Valor a pagar : R$* ${totalReceber}
+       *Valor a pagar : R$* ${totalPagar} 
+                 
+       *Valor a receber : R$* ${totalReceber}            
             
-            *Valor a receber : R$* ${totalPagar}
+       *Prêmio :* ${premioText}
             
-            *Prêmio :* ${premioText}
+       *Horário :* ${horario}
             
-            *Horário :* ${horario}
-            
-            *Milhares e Centena :* ${milharesString}`;
+       *Milhares e Centena :* ${milharesString}`;
 
             var mensagemEncoded = encodeURIComponent(mensagem);
             var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
