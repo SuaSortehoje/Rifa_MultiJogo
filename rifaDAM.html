@@ -213,9 +213,11 @@
     const dezenasString = document.getElementById('dezenasSelecionadas').innerText;
     const linkRifa = "https://rifa-de-dezena-5.webnode.page/";
 
-    var mensagem = `*${titulo}*
+    var mensagem = `${linkRifa}
+    
+    *${titulo}*
         
-                    *Olá, ${nome}!*
+                    *Olá, ${nome} !*
         
              *Segue o código PIX* : ${codigoPix}. 
                     
@@ -223,13 +225,11 @@
                     
                     *Valor a receber* : R$ ${totalPagar}.
                     
-                    *Prêmio* : ${premio}.
+                    *Prêmio* : ${premio}
                     
-                    *Horário* : ${horario}.
+                    *Horário* : ${horario}
                     
-                    *Dezenas* : ${dezenasString}.
-                    
-      ${linkRifa}`;
+                    *Dezenas* : ${dezenasString}`;
 
     var mensagemEncoded = encodeURIComponent(mensagem);
     var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
