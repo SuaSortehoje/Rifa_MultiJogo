@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo de Centenas</title>
-     <style>
+    <style>
         body {
             font-family: Arial, sans-serif;
             background-color: black;
@@ -22,16 +22,8 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        input[type="tel"], select {
+        input[type="tel"], input[type="text"], select {
             width: 30%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
-        input[type="text"], select {
-            width: 70%;
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 5px;
@@ -68,7 +60,33 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-    
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #horarioInput {
+            width:40%;
+        }
+        #premioInput{
+            width:40%;
+        }
+        #nomeInput{
+            display:flex;
+            width:50%;
+        }
+        #numeroInput{
+            display:flex;
+            width:70%;
+        }
     </style>
 </head>
 <body>
@@ -77,6 +95,7 @@
         <input type="tel" id="valorInput" placeholder="Digite o valor (em centenas)">
         <input type="text" id="nomeInput" placeholder="Digite seu nome">
         <select id="horarioInput">
+            <option value="HORARIO ATUAL">HORARIO</option>
             <option value="10h">10h</option>
             <option value="12h">12h</option>
             <option value="15h">15h</option>
@@ -84,14 +103,16 @@
             <option value="21h">21h</option>
         </select>
         <select id="premioInput">
+            <option value="premio">PREMIOS</option>
             <option value="1ºpremio">Único 1º prêmio</option>
-            <option value="1ao5">1º ao 5º</option>
+            <option value="1ao5">1º ao 5º</option><br>
         </select>
-        <input type="tel" id="centenaInput1" placeholder="Digite a centena (3 números)"maxlength="3">
-        <input type="tel" id="centenaInput2" placeholder="Digite a centena (3 números)"maxlength="3">
-        <input type="tel" id="centenaInput3" placeholder="Digite a centena (3 números)"maxlength="3">
-        <input type="tel" id="centenaInput4" placeholder="Digite a centena (3 números)"maxlength="3">
-        <input type="tel" id="centenaInput5" placeholder="Digite a centena (3 números)"maxlength="3">
+        <input type="tel" id="centenaInput1" placeholder="Digite a centena (3 números)" maxlength="3">
+        <input type="tel" id="centenaInput2" placeholder="Digite a centena (3 números)" maxlength="3">
+        <input type="tel" id="centenaInput3" placeholder="Digite a centena (3 números)" maxlength="3">
+        <input type="tel" id="centenaInput4" placeholder="Digite a centena (3 números)" maxlength="3">
+        <input type="tel" id="centenaInput5" placeholder="Digite a centena (3 números)" maxlength="3">
+        <input type="tel" id="numeroInput" placeholder="Digite o número de telefone" required>
         <br>
         <button onclick="adicionarCentena()">Adicionar Centena</button>
         <button onclick="calcular()">Calcular</button>
@@ -100,6 +121,7 @@
     <div id="modal">
         <div id="modal-content">
             <h3>Detalhes do Jogo</h3>
+            <button class="close" onclick="fecharModal()">&times;</button>
             <p>Nome: <span id="nomePix"></span></p>
             <p>Horário: <span id="horarioPix"></span></p>
             <p>Centenas: <span id="centenasPix"></span></p>
@@ -136,6 +158,7 @@
             var nome = document.getElementById('nomeInput').value;
             var premio = document.getElementById('premioInput').value;
             var horarioInput = document.getElementById('horarioInput').value;
+            var numero = document.getElementById('numeroInput').value;
 
             if (nome && valor) { 
                 valor = parseInt(valor);
@@ -147,7 +170,7 @@
                         total = valor * 700;
                     }
                     var totalPagar = valor * centenas.length; 
-                    showModal(nome, horarioInput, totalPagar, total);
+                    showModal(nome, horarioInput, totalPagar, total, numero);
                 } else {
                     alert('Por favor, digite um valor válido.');
                 }
@@ -156,7 +179,7 @@
             }
         }
 
-        function showModal(nome, horario, totalPagar, totalReceber) {
+        function showModal(nome, horario, totalPagar, totalReceber, numero) {
             var modal = document.getElementById('modal');
             var nomePix = document.getElementById('nomePix');
             var horarioPix = document.getElementById('horarioPix');
@@ -176,6 +199,11 @@
             modal.style.display = 'flex';
         }
 
+        function fecharModal() {
+            var modal = document.getElementById('modal');
+            modal.style.display = 'none';
+        }
+
         function copyPix() {
             var codigoPix = document.getElementById('codigoPix');
             var range = document.createRange();
@@ -189,7 +217,7 @@
 
         function enviarWhatsApp() {
             const titulo = "MULTIJOGO RIFA DE CENTENA";
-            const linkCentena ="https://rifa-de-dezena-5.webnode.page/meu-trabalho/";
+            const linkCentena ="https://multijogo-38.webnode.page/centenas/";
             var nome = document.getElementById('nomeInput').value;
             var premio = document.getElementById('premioInput').value;
             var horario = document.getElementById('horarioInput').value;
@@ -197,6 +225,7 @@
             var totalPagar = document.getElementById('totalPagar').textContent;
             var totalReceber = document.getElementById('totalReceber').textContent;
             var codigoPix = document.getElementById('codigoPix').textContent;
+            var numero = document.getElementById('numeroInput').value;
 
             var mensagem = `${linkCentena}
            
@@ -215,9 +244,9 @@
             *Horário :* ${horario}
             
             *Centenas :* ${centenasString}`;
-
+            
             var mensagemEncoded = encodeURIComponent(mensagem);
-            var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
+            var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}&phone=${numero}`;
             window.open(linkWhatsApp, '_blank');
         }
 
