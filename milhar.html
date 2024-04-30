@@ -22,16 +22,8 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        input[type="tel"], select {
+        input[type="tel"], input[type="text"], select {
             width: 30%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
-        input[type="text"], select {
-            width: 70%;
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 5px;
@@ -68,13 +60,39 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+     #horarioInput {
+            width:40%;
+        }
+        #premioInput{
+                
+            width:40%;
+        }
+        #nomeInput{
+            display:flex;
+            width:50%;
+        }
+        #whatsappInput{
+        
+            width:70%;
+        }      
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Jogo de Milhares</h2>
+        <h2>JOGO de MILHAR</h2>
         <input type="tel" id="valorInput" placeholder="Digite o valor (em milhares)">
         <input type="text" id="nomeInput" placeholder="Digite seu nome">
+        <input type="tel" id="whatsappInput" placeholder="Número do WhatsApp">
         <select id="horarioInput">
             <option value="10h">10h</option>
             <option value="12h">12h</option>
@@ -83,7 +101,7 @@
             <option value="21h">21h</option>
         </select>
         <select id="premioInput">
-            <option value="premio">Prêmio</option>
+            <option value="premio">1º Prêmio</option>
             <option value="1a5premio">1º ao 5º Prêmio</option>
         </select>
         <input type="tel" id="milharInput1" placeholder="Digite a milhar (4 números)" maxlength="4">
@@ -98,6 +116,7 @@
 
     <div id="modal">
         <div id="modal-content">
+            <button class="close-btn" onclick="fecharModal()">X</button>
             <h2>Detalhes do Jogo</h2>
             <p>Nome: <span id="nomePix"></span></p>
             <p>Horário: <span id="horarioPix"></span></p>
@@ -133,7 +152,7 @@
                 if (!isNaN(valor)) {
                     var total;
                     if (premio === "1a5premio") {
-                        total = valor * 4000 / 5;
+                        total = valor * 4000/ 5;
                     } else {
                         total = valor * 4000;
                     }
@@ -188,33 +207,40 @@
             var totalPagar = document.getElementById('totalPagar').textContent;
             var totalReceber = document.getElementById('totalReceber').textContent;
             var codigoPix = document.getElementById('codigoPix').textContent;
+            var whatsappNumero = document.getElementById('whatsappInput').value;
 
             var selecionado = document.getElementById('premioInput');
             var premioText = selecionado.options[selecionado.selectedIndex].text;
+            var multijogo = "MULTIJOGO RIFA DE MILHAR";
+            
+            const linkmilharEcentena ="https://multijogo-38.webnode.page/milhar/";
 
-            var multijogo = "MULTIJOGO RIFA DE MILHAR\n\n";
+    var mensagem = `${linkmilharEcentena}
+    
+*${multijogo}*
 
-const linkMilhar="https://rifa-de-dezena-5.webnode.page/meu-trabalho/o-grande-dia/";
-            var mensagem = `${linkMilhar}
-            
-       ${multijogo}          *Olá,* ${nome}!
-            
-            *Segue o código PIX :*
-             ${codigoPix}
-            
-            *Valor a pagar : R$* ${totalReceber}
-            
-            *Valor a receber : R$* ${totalPagar}
-            
-            *Prêmio :* ${premioText}
-            
-            *Horário :* ${horario}
-            
-            *Milhares :* ${milharesString}`;
+Olá, ${nome} !
+
+       *Segue o código PIX :* ${codigoPix}
+
+               *Valor a pagar :* R$ $
+{totalPagar}
+               *Valor a receber :* R$ $
+{totalReceber}
+               *Prêmio :* ${premioText}
+
+                *Horário :* ${horario}
+
+  *Milhares :* ${milharesString}`;
 
             var mensagemEncoded = encodeURIComponent(mensagem);
-            var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
+            var linkWhatsApp = `https://api.whatsapp.com/send?phone=${whatsappNumero}&text=${mensagemEncoded}`;
             window.open(linkWhatsApp, '_blank');
+        }
+
+        function fecharModal() {
+            var modal = document.getElementById('modal');
+            modal.style.display = 'none';
         }
     </script>
 </body>
