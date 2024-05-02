@@ -11,17 +11,17 @@
 <div id="rifa">
     <ul id="dezenas"></ul>
     
-    <a href="rifa_das_10h.html">
-   <button id="horario">10 horas</button></a>
-     <a href="rifa_das_12h.html">
-  <button id="horario">12 horas</button></a>
+    <a class="link" href="rifa_das_10h.html">
+   <button id="horario1">10 horas</button></a>
+     <a class="link" href="rifa_das_12h.html">
+  <button id="horario1">12 horas</button></a>
     
-     <a href="rifa_das_15h.html">
-    <button id="horario">15 horas</button></a>
-     <a href="rifa_das_19h.html">
-    <button id="horario">19 horas</button></a>
-     <a href="rifa_das_21h.html">
-    <button id="horario">21 horas</button></a>
+     <a class="link" href="rifa_das_15h.html">
+    <button id="horario1">15 horas</button></a>
+     <a class="link" href="rifa_das_19h.html">
+    <button id="horario1">19 horas</button></a>
+     <a class="link" href="rifa_das_21h.html">
+    <button id="horario1">21 horas</button></a>
     <h2> AREA ADM <h2>
     
      <a href="centena.html">
@@ -32,7 +32,7 @@
     <button id="horario">DZN DO ADM</button></a>
     
  
-       <a href="grupo.html">
+       <a  href="grupo.html">
     <button id="horario">GRUPO ADM</button></a>
     <h3></h3>
     
@@ -72,7 +72,38 @@ h1,h2,h3,h4{
 #horario:focus {
     background-color:gold;
 }
+#horario1 {
+    display: inline;
+            margin: 1px;
+            padding: 15px 2px;
+            background-color:#7FFF00;
+            color:;
+            font-size:bold;
+            cursor: pointer;
+            border-radius:20px;
+            outline:none;  
+            align-intem:center;
+}
+#horario:focus {
+    background-color:gold;
+}
 a {
     color:#007bff;
+}
+.link {
+color:#7FFF00;
+}
+#horario1{
+    animation:horario1 1s infinite;
+}
+@keyframes{
+    20%{background:blue;}
+    30%{color:black;}
+    50%{background:gold;}
+    60{background:red;}
+    80%{background:green;}
+    90%{color:white}
+    100%{background:red;}
+    
 }
 </style>
