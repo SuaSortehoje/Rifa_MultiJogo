@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TERNO DE DEZENA</title>
+   <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="tel"], select {
+            width: 20%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            text-align:center;
+        }
+        input[type="text"], select {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #00d0ff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #00aacc;
+        }
+        #modal {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+        #modal-content {
+            background-color: black;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #valorInput{
+            width:40%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Jogo TERNO de DEZENA</h2>
+    <input type="tel" id="valorInput" placeholder="Digite o valor a receber (em milhares)">
+    <input type="text" id="nomeInput" placeholder="Digite seu nome">
+    <input type="text" id="numeroWhatsapp" placeholder="Digite seu whatsapp"> <!-- Corrigido: removi espaço em branco no ID -->
+
+    <select id="horarioInput">
+        <option value="10h">10h</option>
+        <option value="12h">12h</option>
+        <option value="15h">15h</option>
+        <option value="19h">19h</option>
+        <option value="21h">21h</option>
+    </select>
+    <select id="premioInput">
+        <option value="1a5premio">1º ao 5º Prêmio</option>
+        <option value="6a10premio">6º ao 10º Prêmio</option>
+    </select><br>
+    <input type="tel" id="duqueInput1" placeholder="Digite o duque de dezena (2 números)" maxlength="2">
+    <input type="text" value="x" readonly style="width: 1px; text-align: center;">
+    <input type="tel" id="duqueInput2" placeholder="Digite o duque de dezena (2 números)" maxlength="2">
+    <input type="text" value="x" readonly style="width: 1px; text-align: center;">
+    <input type="tel" id="duqueInput3" placeholder="Digite o duque de dezena (2 números)" maxlength="2">
+
+    <br>
+    <button onclick="adicionarDuqueDeDezena()">Adicionar Duque de Dezena</button>
+    <button onclick="calcular()">Calcular</button>
+</div>
+
+<div id="modal" style="display: none;">
+    <div id="modal-content">
+        <h2>Detalhes do Jogo</h2>
+        <p>Nome: <span id="nomePix"></span></p>
+        <p>Horário: <span id="horarioPix"></span></p>
+        <p>Duques de Dezena: <span id="duquesDeDezenaPix"></span></p>
+        <p>Total a pagar: R$ <span id="totalPagar"></span></p>
+        <p>Total a Receber: R$ <span id="totalReceber"></span></p>
+        <p>Código PIX: <span id="codigoPix"></span></p>
+        <button onclick="copyPix()">Copiar PIX</button>
+        <button onclick="enviarWhatsApp()">Enviar por WhatsApp</button>
+    </div>
+</div>
+
+<script>
+    var duquesDeDezena = [];
+
+    function adicionarDuqueDeDezena() {
+        var duqueDeDezena1 = document.getElementById('duqueInput1').value;
+        var duqueDeDezena2 = document.getElementById('duqueInput2').value;
+        var duqueDeDezena3 = document.getElementById('duqueInput3').value;
+
+        if (duqueDeDezena1.length === 2 && duqueDeDezena2.length === 2 && duqueDeDezena3.length === 2) {
+            var duqueDeDezena = '(' + duqueDeDezena1 + 'x' + duqueDeDezena2 + 'x'+duqueDeDezena3 + ')';
+            duquesDeDezena.push(duqueDeDezena);
+            alert('Duque de Dezena adicionado com sucesso!');
+
+            document.getElementById('duqueInput1').value = '';
+            document.getElementById('duqueInput2').value = '';
+            document.getElementById('duqueInput3').value = '';
+        } else {
+            alert('Por favor, insira três números de dois dígitos para formar o duque de dezena.');
+        }
+    }
+
+    function calcular() {
+        var valor = document.getElementById('valorInput').value;
+        var nome = document.getElementById('nomeInput').value;
+        var premio = document.getElementById('premioInput').value;
+        var horarioInput = document.getElementById('horarioInput').value;
+        var numeroWhatsapp = document.getElementById('numeroWhatsapp').value; 
+
+        if (nome && valor) {
+            valor = parseInt(valor);
+            if (!isNaN(valor)) {
+                var total;
+                if (premio === "1a5premio") {
+                    total = valor * 3000;
+                } else if (premio === "6a10premio") {
+                    total = valor * 3000 / 10;
+                } else {
+                    total = valor * 3000;
+                }
+                var totalPagar = valor * duquesDeDezena.length;
+                var totalReceber =  total;
+                showModal(nome, horarioInput, totalPagar, totalReceber, numeroWhatsapp); 
+            } else {
+                alert('Por favor, digite um valor válido.');
+            }
+        } else {
+            alert('Por favor, preencha pelo menos o nome e o valor.');
+        }
+    }
+
+    function showModal(nome, horario, totalPagar, totalReceber, numeroWhatsapp) {
+        var modal = document.getElementById('modal');
+        var nomePix = document.getElementById('nomePix');
+        var horarioPix = document.getElementById('horarioPix');
+        var duquesDeDezenaPix = document.getElementById('duquesDeDezenaPix');
+        var totalPagarElement = document.getElementById('totalPagar');
+        var totalReceberElement = document.getElementById('totalReceber');
+        var codigoPix = document.getElementById('codigoPix');
+
+        nomePix.textContent = nome;
+        horarioPix.textContent = horario;
+        duquesDeDezenaPix.textContent = duquesDeDezena.join(', ');
+
+        totalPagarElement.textContent = totalPagar.toFixed(2);
+        totalReceberElement.textContent = totalReceber.toFixed(2);
+
+        codigoPix.textContent = '71992290058';
+
+        modal.style.display = 'block';
+    }
+
+    function copyPix() {
+        var codigoPix = document.getElementById('codigoPix');
+        var range = document.createRange();
+        range.selectNode(codigoPix);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        alert('Código PIX copiado!');
+    }
+
+    function enviarWhatsApp() {
+        var nome = document.getElementById('nomeInput').value;
+        var valor = document.getElementById('valorInput').value;
+        var premio = document.getElementById('premioInput').value;
+        var horario = document.getElementById('horarioInput').value;
+        var duquesDeDezenaString = duquesDeDezena.join(', ');
+        var totalPagar = document.getElementById('totalPagar').textContent;
+        var totalReceber = document.getElementById('totalReceber').textContent;
+        var codigoPix = document.getElementById('codigoPix').textContent;
+        var numeroWhatsapp = document.getElementById('numeroWhatsapp').value; 
+
+        var selecionadoHorario = document.getElementById('horarioInput');
+        var horarioText = selecionadoHorario.options[selecionadoHorario.selectedIndex].text;
+
+        var selecionadoPremio = document.getElementById('premioInput');
+        var premioText = selecionadoPremio.options[selecionadoPremio.selectedIndex].text;
+
+        var multijogo = "MULTIJOGO TERNO DE DEZENA\n\n";
+
+        var mensagem = `${multijogo}*Olá, ${nome}!*\n\n*Segue o código PIX*: ${codigoPix}.\n\nValor a receber: R$ ${totalReceber}.\n\nValor a pagar: R$ ${totalPagar}.\n\nPrêmio: ${premioText}.\n\nHorário: ${horarioText}.\n\nDuques de Dezena: *${duquesDeDezenaString}*`;
+
+        var mensagemEncoded = encodeURIComponent(mensagem);
+        var linkWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsapp}&text=${mensagemEncoded}`;
+        window.open(linkWhatsApp, '_blank');
+    }
+</script>
+</body>
+</html>
