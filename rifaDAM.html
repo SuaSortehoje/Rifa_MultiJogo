@@ -123,8 +123,8 @@
 <div id="rifa">
     <ul id="dezenas"></ul>
     <input type="number" class="vDezenas" id="valorPorDezena" placeholder="(R$)">
-    <input type="text" class="nome"id="whatsappName" placeholder="Nome do destinatário">
-    
+    <input type="text" class="nome" id="whatsappName" placeholder="Nome do destinatário">
+    <input type="tel" class="nome" id="whatsappNumber" placeholder="Número do WhatsApp"><br>
     <select class="sele"  id="premioSelect">
         <option value="1">1º Prêmio</option>
         <option value="5">1º ao 5º Prêmio</option>
@@ -203,42 +203,54 @@
         });
 
         document.getElementById('enviarWhatsApp').addEventListener('click', function () {
-    const nome = document.getElementById('whatsappName').value;
-    const titulo = "MULTIJOGO RIFA DE DEZENA";
-    let resultado ="https://www.resultadofacil.com.br/resultado-do-jogo-do-bicho/BA";
-    const codigoPix = document.getElementById('pixKey').innerText;
-    const totalReceber = document.getElementById('valorPagar').innerText;
-    const totalPagar = document.getElementById('valorReceber').innerText;
-    const premioSelect = document.getElementById('premioSelect');
-    const premio = premioSelect.options[premioSelect.selectedIndex].text;
-    const horario = document.getElementById('horario').innerText;
-    const dezenasString = document.getElementById('dezenasSelecionadas').innerText;
-    let linkRifa = "https://multijogo-38.webnode.page/dezenas/";
+           
+            const nome = document.getElementById('whatsappName').value;
+            const numeroWhatsApp = document.getElementById('whatsappNumber').value;
+            const titulo = "MULTIJOGO RIFA DE DEZENA";
+            
+             let resultado ="https://www.resultadofacil.com.br/resultado-do-jogo-do-bicho/BA"; 
+            const codigoPix = document.getElementById('pixKey').innerText;
+            
+            const totalReceber = document.getElementById('valorPagar').innerText;
+            const totalPagar = document.getElementById('valorReceber').innerText;
+            const premioSelect = document.getElementById('premioSelect');
+            const premio = premioSelect.options[premioSelect.selectedIndex].text;
+            const horario = document.getElementById('horario').innerText;
+            
+            const dezenasString = document.getElementById('dezenasSelecionadas').innerText;
+            const linkRifa = "https://multijogo-38.webnode.page/dezenas/";
 
-    var mensagem = `${linkRifa}
-    *${titulo}*
+         var mensagem = `${linkRifa}
+               *${titulo}*
         
-                    *Olá, ${nome} !*
-        
-             *Segue o código PIX* : ${codigoPix} 
-                    
-                    *Valor a pagar* : R$ ${totalReceber}
-                    
-                    *Valor a receber* : R$ ${totalPagar}
-                    
-                    *Prêmio* : ${premio}
-                    
-                    *Horário* : ${horario}
-                    
-     *Dezenas* : ${dezenasString}
-                    
+                           *Olá, ${nome} !*
+            
+           *Segue o código PIX* : ${codigoPix} 
+                            
+                            *Valor a pagar* : R$ ${totalReceber}
+                            
+                            *Valor a receber* : R$ ${totalPagar}
+                            
+                            *Prêmio* : ${premio}
+                            
+                            *Horário* : ${horario}
+                            
+                            *Dezenas* : ${dezenasString}
+                            
 *RESULTADO* :  ${resultado}`;
 
-    var mensagemEncoded = encodeURIComponent(mensagem);
-    var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
-    window.open(linkWhatsApp, '_blank');
-});
+            var mensagemEncoded = encodeURIComponent(mensagem);
+            var linkWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensagemEncoded}`;
+            window.open(linkWhatsApp, '_blank');
 
+            // Fechar o modal após enviar pelo WhatsApp
+            closeModal();
+        });
+
+        function closeModal() {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => modal.style.display = 'none');
+        }
 
     });
 
@@ -250,8 +262,7 @@
 
     const span = document.getElementsByClassName('close')[0];
     span.onclick = function () {
-        const modals = document.querySelectorAll('.modal');
-        modals.forEach(modal => modal.style.display = 'none');
+        closeModal();
     };
 
     window.onclick = function (event) {
@@ -274,4 +285,4 @@
         }
 </script>
 </body>
-</html> 
+</html>
