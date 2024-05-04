@@ -22,8 +22,22 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        input[type="tel"], input[type="text"], select {
+        input[type="tel"], select {
             width: 30%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            text-align:center;
+        }
+        
+  input[type="tel"], select:focus {
+      background-color:black;
+      color:white;}
+      
+        input[type="text"], select {
+            width: 70%;
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 5px;
@@ -60,39 +74,13 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: transparent;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-        }
-     #horarioInput {
-            width:40%;
-        }
-        #premioInput{
-                
-            width:40%;
-        }
-        #nomeInput{
-            display:flex;
-            width:50%;
-        }
-        #whatsappInput{
-        
-            width:70%;
-        }      
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>JOGO de MILHAR</h2>
+        <h2>Jogo de Milhares</h2>
         <input type="tel" id="valorInput" placeholder="Digite o valor (em milhares)">
         <input type="text" id="nomeInput" placeholder="Digite seu nome">
-        <input type="tel" id="whatsappInput" placeholder="Número do WhatsApp">
         <select id="horarioInput">
             <option value="10h">10h</option>
             <option value="12h">12h</option>
@@ -116,7 +104,6 @@
 
     <div id="modal">
         <div id="modal-content">
-            <button class="close-btn" onclick="fecharModal()">X</button>
             <h2>Detalhes do Jogo</h2>
             <p>Nome: <span id="nomePix"></span></p>
             <p>Horário: <span id="horarioPix"></span></p>
@@ -133,11 +120,19 @@
         var milhares = [];
 
         function adicionarMilhar() {
-            var milharInputs = document.querySelectorAll('[id^="milharInput"]');
+            var milharInput1 = document.getElementById('milharInput1').value;
+            var milharInput2 = document.getElementById('milharInput2').value;
+            var milharInput3 = document.getElementById('milharInput3').value;
+            var milharInput4 = document.getElementById('milharInput4').value;
+            var milharInput5 = document.getElementById('milharInput5').value;
+
             milhares = []; // Limpa o array de milhares antes de adicionar novos
-            milharInputs.forEach(function(input) {
-                if (input.value.length === 4) milhares.push(`(${input.value})`);
-            });
+            if (milharInput1.length === 4) milhares.push(milharInput1);
+            if (milharInput2.length === 4) milhares.push(milharInput2);
+            if (milharInput3.length === 4) milhares.push(milharInput3);
+            if (milharInput4.length === 4) milhares.push(milharInput4);
+            if (milharInput5.length === 4) milhares.push(milharInput5);
+
             alert('Milhares adicionados com sucesso!');
         }
 
@@ -152,7 +147,7 @@
                 if (!isNaN(valor)) {
                     var total;
                     if (premio === "1a5premio") {
-                        total = valor * 4000/ 5;
+                        total = valor * 4000 / 5;
                     } else {
                         total = valor * 4000;
                     }
@@ -182,7 +177,7 @@
             totalPagarElement.textContent = totalPagar.toFixed(2);
             totalReceberElement.textContent = totalReceber.toFixed(2); // Correção aqui
 
-            codigoPix.textContent = 'ed6b83b3-a790-4245-8114-cd75f8b6a9ef';
+            codigoPix.textContent = 'https://multijogo.github.io/Link-de-pagamento-pix/';
 
             modal.style.display = 'flex';
         }
@@ -198,50 +193,46 @@
             alert('Código PIX copiado!');
         }
 
-        function enviarWhatsApp() {
-            var nome = document.getElementById('nomeInput').value;
-            var valor = document.getElementById('valorInput').value;
-            var premio = document.getElementById('premioInput').value;
-            var horario = document.getElementById('horarioInput').value;
-            var milharesString = milhares.join(', ');
-            var totalPagar = document.getElementById('totalPagar').textContent;
-            var totalReceber = document.getElementById('totalReceber').textContent;
-            var codigoPix = document.getElementById('codigoPix').textContent;
-            var whatsappNumero = document.getElementById('whatsappInput').value;
+      function enviarWhatsApp() {
+    var nome = document.getElementById('nomeInput').value;
+    var valor = document.getElementById('valorInput').value;
+    var premio = document.getElementById('premioInput').value;
+    var horario = document.getElementById('horarioInput').value;
+    var milharesString = milhares.join(', ');
+    var totalPagar = document.getElementById('totalPagar').textContent;
+    var totalReceber = document.getElementById('totalReceber').textContent;
+    var codigoPix = document.getElementById('codigoPix').textContent;
 
-            var selecionado = document.getElementById('premioInput');
-            var premioText = selecionado.options[selecionado.selectedIndex].text;
-            var multijogo = "MULTIJOGO RIFA DE MILHAR";
-            
-            const linkmilharEcentena ="https://multijogo-38.webnode.page/milhar/";
+    var selecionado = document.getElementById('premioInput');
+    var premioText = selecionado.options[selecionado.selectedIndex].text;
+ let resultado ="https://www.resultadofacil.com.br/resultado-do-jogo-do-bicho/BA";
+    var multijogo = "MULTIJOGO MILHAR\n\n";
+    let linktitulo ="https://multijogo-38.webnode.page/milhar/";
 
-    var mensagem = `${linkmilharEcentena}
+    var mensagem = `${linktitulo}
+                ${multijogo}
+            *Olá,* ${nome}!
+         
+  *chave Aleatoria pix* : ${codigoPix}
+          
+                   *VALOR A PAGAR* : R$ ${totalPagar}        
+                    
+                 *VALOR A RECEBER* : R$ ${totalReceber}
+        
+                 *PREMIO* : ${premioText}
+         
+                  *HORÁRIO* : ${horario}
+         
+*MILHARES* : ${milharesString}
     
-*${multijogo}*
+ *RESULTADO* :  ${resultado}`;
 
-Olá, *${nome}* !
+    var mensagemEncoded = encodeURIComponent(mensagem);
+    var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
+    window.open(linkWhatsApp, '_blank');
+}
 
-       *Segue o código PIX :* ${codigoPix}
-
-               *Valor a pagar :* R$ ${totalPagar}
-               
-               *Valor a receber :* R$ ${totalReceber}
-               
-               *Prêmio :* ${premioText}
-
-                *Horário :* ${horario}
-
-  *Milhares :* ${milharesString}`;
-
-            var mensagemEncoded = encodeURIComponent(mensagem);
-            var linkWhatsApp = `https://api.whatsapp.com/send?phone=${whatsappNumero}&text=${mensagemEncoded}`;
-            window.open(linkWhatsApp, '_blank');
-        }
-
-        function fecharModal() {
-            var modal = document.getElementById('modal');
-            modal.style.display = 'none';
-        }
     </script>
 </body>
 </html>
+ 
