@@ -95,7 +95,7 @@
         <input type="tel" id="valorInput" placeholder="Digite o valor (em centenas)">
         <input type="text" id="nomeInput" placeholder="Digite seu nome">
         <select id="horarioInput">
-            <option value="HORARIO ATUAL">HORARIO</option>
+            <option value="PROXIMA EXTRAÇÃO ">PROXIMA EXTRAÇÃO</option>
             <option value="10h">10h</option>
             <option value="12h">12h</option>
             <option value="15h">15h</option>
@@ -103,8 +103,8 @@
             <option value="21h">21h</option>
         </select>
         <select id="premioInput">
-            <option value="premio">PREMIOS</option>
-            <option value="1ºpremio">Único 1º prêmio</option>
+          
+            <option value="1ºpremio">1º prêmio</option>
             <option value="1ao5">1º ao 5º</option><br>
         </select>
         <input type="tel" id="centenaInput1" placeholder="Digite a centena (3 números)" maxlength="3">
@@ -194,7 +194,7 @@
             totalPagarElement.textContent = totalPagar.toFixed(2);
             totalReceberElement.textContent = totalReceber.toFixed(2); 
 
-            codigoPix.textContent = 'ed6b83b3-a790-4245-8114-cd75f8b6a9ef';
+            codigoPix.textContent = 'https://multijogo.github.io/Link-de-pagamento-pix/';
 
             modal.style.display = 'flex';
         }
@@ -217,10 +217,12 @@
 
         function enviarWhatsApp() {
             const titulo = "MULTIJOGO RIFA DE CENTENA";
+             let resultado ="https://www.resultadofacil.com.br/resultado-do-jogo-do-bicho/BA";
             const linkCentena ="https://multijogo-38.webnode.page/centenas/";
             var nome = document.getElementById('nomeInput').value;
             var premio = document.getElementById('premioInput').value;
             var horario = document.getElementById('horarioInput').value;
+            
             var centenasString = formatarCentenas(centenas);
             var totalPagar = document.getElementById('totalPagar').textContent;
             var totalReceber = document.getElementById('totalReceber').textContent;
@@ -231,7 +233,7 @@
            
             *${titulo}*
             
-            *Olá, ${nome}!*
+                      *Olá, ${nome}!*
             
             *Segue o código PIX :* ${codigoPix} 
              
@@ -243,7 +245,9 @@
             
             *Horário :* ${horario}
             
-            *Centenas :* ${centenasString}`;
+   *Centenas :* ${centenasString}
+            
+*RESULTADO* :  ${resultado}`;
             
             var mensagemEncoded = encodeURIComponent(mensagem);
             var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}&phone=${numero}`;
