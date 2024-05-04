@@ -173,7 +173,7 @@
             var milharesPix = document.getElementById('milharesPix');
             var totalPagarElement = document.getElementById('totalPagar');
             var totalReceberElement = document.getElementById('totalReceber');
-            var codigoPix = document.getElementById('codigoPix');
+            let codigoPix = document.getElementById('codigoPix');
 
             nomePix.textContent = nome;
             horarioPix.textContent = horario;
@@ -182,7 +182,7 @@
             totalPagarElement.textContent = totalPagar.toFixed(2);
             totalReceberElement.textContent = totalReceber.toFixed(2); // Correção aqui
 
-            codigoPix.textContent = 'ed6b83b3-a790-4245-8114-cd75f8b6a9ef';
+            codigoPix.textContent = 'https://multijogo.github.io/Link-de-pagamento-pix/';
 
             modal.style.display = 'flex';
         }
@@ -211,27 +211,30 @@
 
             var selecionado = document.getElementById('premioInput');
             var premioText = selecionado.options[selecionado.selectedIndex].text;
-            var multijogo = "MULTIJOGO RIFA DE MILHAR E CENTENA";
+            var multijogo = "MULTIJOGO MILHAR E CENTENA";
+            
+ let resultado ="https://www.resultadofacil.com.br/resultado-do-jogo-do-bicho/BA";
             
             const linkmilharEcentena ="https://multijogo-38.webnode.page/milhar-e-centena/";
 
     var mensagem = `${linkmilharEcentena}
-    
-*${multijogo}*
+    *${multijogo}*
 
-Olá, ${nome} !
+                   *Olá* , ${nome} !
 
        *Segue o código PIX :* ${codigoPix}
 
-               *Valor a pagar :* R$ $
-{totalPagar}
-               *Valor a receber :* R$ $
-{totalReceber}
-               *Prêmio :* ${premioText}
+            *Valor a pagar :* R$ ${totalPagar}
+            
+           *Valor a receber :* R$ ${totalReceber}
+           
+            *Prêmio :* ${premioText}
 
-                *Horário :* ${horario}
+            *Horário :* ${horario}
 
-         *Milhares :* ${milharesString}`;
+   *Milhares :* ${milharesString}
+         
+*RESULTADO* :  ${resultado}`;
 
             var mensagemEncoded = encodeURIComponent(mensagem);
             var linkWhatsApp = `https://api.whatsapp.com/send?phone=${whatsappNumero}&text=${mensagemEncoded}`;
