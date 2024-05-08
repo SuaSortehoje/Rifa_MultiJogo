@@ -151,17 +151,17 @@ var centenaInput6 = document.getElementById('centenaInput6').value;
             var centenaInput8 = document.getElementById('centenaInput8').value;
             var centenaInput9 = document.getElementById('centenaInput9').value;
             var centenaInput10 = document.getElementById('centenaInput10').value;
-            var centenaInput1 = document.getElementById('centenaInput11').value;
-            var centenaInput2 = document.getElementById('centenaInput12').value;
-            var centenaInput3 = document.getElementById('centenaInput13').value;
-            var centenaInput4 = document.getElementById('centenaInput14').value;
-            var centenaInput5 = document.getElementById('centenaInput15').value;
+            var centenaInput11 = document.getElementById('centenaInput11').value;
+            var centenaInput12 = document.getElementById('centenaInput12').value;
+            var centenaInput13 = document.getElementById('centenaInput13').value;
+            var centenaInput14 = document.getElementById('centenaInput14').value;
+            var centenaInput15 = document.getElementById('centenaInput15').value;
             
-var centenaInput6 = document.getElementById('centenaInput16').value;
-            var centenaInput7 = document.getElementById('centenaInput17').value;
-            var centenaInput8 = document.getElementById('centenaInput18').value;
-            var centenaInput9 = document.getElementById('centenaInput19').value;
-            var centenaInput10 = document.getElementById('centenaInput20').value;
+var centenaInput16 = document.getElementById('centenaInput16').value;
+            var centenaInput17 = document.getElementById('centenaInput17').value;
+            var centenaInput18 = document.getElementById('centenaInput18').value;
+            var centenaInput19 = document.getElementById('centenaInput19').value;
+            var centenaInput20 = document.getElementById('centenaInput20').value;
             centenas = []; 
             if (centenaInput1.length === 3) centenas.push(centenaInput1);
             if (centenaInput2.length === 3) centenas.push(centenaInput2);
@@ -173,7 +173,7 @@ var centenaInput6 = document.getElementById('centenaInput16').value;
             if (centenaInput8.length === 3) centenas.push(centenaInput8);
             if (centenaInput9.length === 3) centenas.push(centenaInput9);
             if (centenaInput10.length === 3) centenas.push(centenaInput10);
-               if (centenaInput11.length === 3) centenas.push(centenaInput11);
+            if (centenaInput11.length === 3) centenas.push(centenaInput11);
             if (centenaInput12.length === 3) centenas.push(centenaInput12);
             if (centenaInput13.length === 3) centenas.push(centenaInput13);
             if (centenaInput14.length === 3) centenas.push(centenaInput14);
@@ -252,12 +252,13 @@ var centenaInput6 = document.getElementById('centenaInput16').value;
             var totalPagar = document.getElementById('totalPagar').textContent;
             var totalReceber = document.getElementById('totalReceber').textContent;
             var codigoPix = document.getElementById('codigoPix').textContent;
- let resultado ="https://www.resultadofacil.com.br/resultado-do-jogo-do-bicho/BA";
- 
+
  let linkCentena ="https://multijogo-38.webnode.page/centenas/";
  
+ const responsabilidade = "E de Responsabildade do Apostador Conferir sua pule antes da Extracao";
+ 
             var mensagem = `${linkCentena}
-            *${titulo}*
+          *${titulo}*
             
                    *Olá* , ${nome} !
             
@@ -273,7 +274,7 @@ var centenaInput6 = document.getElementById('centenaInput16').value;
             
  *Centenas :* ${centenasString}
             
-*RESULTADO* :  ${resultado}`;
+*${responsabilidade}*`;
 
             var mensagemEncoded = encodeURIComponent(mensagem);
             var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
