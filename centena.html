@@ -107,6 +107,16 @@
         <input type="tel" id="centenaInput8" placeholder="Digite a centena (3 números)"maxlength="3">
         <input type="tel" id="centenaInput9" placeholder="Digite a centena (3 números)"maxlength="3">
         <input type="tel" id="centenaInput10" placeholder="Digite a centena (3 números)"maxlength="3">
+       <input type="tel" id="centenaInput11" placeholder="Digite a centena (3 números)"maxlength="3">
+        <input type="tel" id="centenaInput12" placeholder="Digite a centena (3 números)"maxlength="3">
+        <input type="tel" id="centenaInput13" placeholder="Digite a centena (3 números)"maxlength="3">
+        <input type="tel" id="centenaInput14" placeholder="Digite a centena (3 números)"maxlength="3">
+        <input type="tel" id="centenaInput15" placeholder="Digite a centena (3 números)"maxlength="3">
+        <input type="tel" id="centenaInput16" placeholder="Digite a centena (3 números)"maxlength="3">
+        <input type="tel" id="centenaInput17" placeholder="Digite a centena (3 números)"maxlength="3">
+        <input type="tel" id="centenaInput18" placeholder="Digite a centena (3 números)"maxlength="3">
+        <input type="tel" id="centenaInput19" placeholder="Digite a centena (3 números)"maxlength="3">
+        <input type="tel" id="centenaInput20" placeholder="Digite a centena (3 números)"maxlength="3">   
         <br>
         <button onclick="adicionarCentena()">Adicionar Centena</button>
         <button onclick="calcular()">Calcular</button>
@@ -141,6 +151,17 @@ var centenaInput6 = document.getElementById('centenaInput6').value;
             var centenaInput8 = document.getElementById('centenaInput8').value;
             var centenaInput9 = document.getElementById('centenaInput9').value;
             var centenaInput10 = document.getElementById('centenaInput10').value;
+            var centenaInput1 = document.getElementById('centenaInput11').value;
+            var centenaInput2 = document.getElementById('centenaInput12').value;
+            var centenaInput3 = document.getElementById('centenaInput13').value;
+            var centenaInput4 = document.getElementById('centenaInput14').value;
+            var centenaInput5 = document.getElementById('centenaInput15').value;
+            
+var centenaInput6 = document.getElementById('centenaInput16').value;
+            var centenaInput7 = document.getElementById('centenaInput17').value;
+            var centenaInput8 = document.getElementById('centenaInput18').value;
+            var centenaInput9 = document.getElementById('centenaInput19').value;
+            var centenaInput10 = document.getElementById('centenaInput20').value;
             centenas = []; 
             if (centenaInput1.length === 3) centenas.push(centenaInput1);
             if (centenaInput2.length === 3) centenas.push(centenaInput2);
@@ -152,6 +173,16 @@ var centenaInput6 = document.getElementById('centenaInput6').value;
             if (centenaInput8.length === 3) centenas.push(centenaInput8);
             if (centenaInput9.length === 3) centenas.push(centenaInput9);
             if (centenaInput10.length === 3) centenas.push(centenaInput10);
+               if (centenaInput11.length === 3) centenas.push(centenaInput11);
+            if (centenaInput12.length === 3) centenas.push(centenaInput12);
+            if (centenaInput13.length === 3) centenas.push(centenaInput13);
+            if (centenaInput14.length === 3) centenas.push(centenaInput14);
+            if (centenaInput15.length === 3) centenas.push(centenaInput15);
+            if (centenaInput16.length === 3) centenas.push(centenaInput16);
+            if (centenaInput17.length === 3) centenas.push(centenaInput17);
+            if (centenaInput18.length === 3) centenas.push(centenaInput18);
+            if (centenaInput19.length === 3) centenas.push(centenaInput19);
+            if (centenaInput20.length === 3) centenas.push(centenaInput20);
 
             alert('Centenas adicionadas com sucesso!');
         }
@@ -167,7 +198,7 @@ var centenaInput6 = document.getElementById('centenaInput6').value;
                 if (!isNaN(valor)) {
                     var total;
                     if (premio === "1ao5") {
-                        total = valor * 700 / 5;
+                    total = valor * 700 / 5;
                     } else {
                         total = valor * 700;
                     }
