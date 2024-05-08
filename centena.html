@@ -26,9 +26,9 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         input[type="tel"], select {
-            width: 30%;
+            width: 18%;
             padding: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 2px;
             border-radius: 5px;
             border: 1px solid #ccc;
             box-sizing: border-box;
@@ -71,13 +71,20 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-    
+    .valor {
+        width: 30%;
+            padding: 10px;
+            margin-bottom: 2px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+    }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Jogo de Centenas</h2>
-        <input type="tel" id="valorInput" placeholder="Digite o valor (em centenas)">
+        <input type="number" class="valor" id="valorInput" placeholder="Digite o valor (em centenas)">
         <input type="text" id="nomeInput" placeholder="Digite seu nome">
         <select id="horarioInput">
             <option value="10h">10h</option>
@@ -89,12 +96,17 @@
         <select id="premioInput">
             <option value="1ºpremio"> 1º prêmio</option>
             <option value="1ao5">1º ao 5º</option>
-        </select>
+        </select><br>
         <input type="tel" id="centenaInput1" placeholder="Digite a centena (3 números)"maxlength="3">
         <input type="tel" id="centenaInput2" placeholder="Digite a centena (3 números)"maxlength="3">
         <input type="tel" id="centenaInput3" placeholder="Digite a centena (3 números)"maxlength="3">
         <input type="tel" id="centenaInput4" placeholder="Digite a centena (3 números)"maxlength="3">
         <input type="tel" id="centenaInput5" placeholder="Digite a centena (3 números)"maxlength="3">
+        <input type="tel" id="centenaInput6" placeholder="Digite a centena (3 números)"maxlength="3">
+        <input type="tel" id="centenaInput7" placeholder="Digite a centena (3 números)"maxlength="3">
+        <input type="tel" id="centenaInput8" placeholder="Digite a centena (3 números)"maxlength="3">
+        <input type="tel" id="centenaInput9" placeholder="Digite a centena (3 números)"maxlength="3">
+        <input type="tel" id="centenaInput10" placeholder="Digite a centena (3 números)"maxlength="3">
         <br>
         <button onclick="adicionarCentena()">Adicionar Centena</button>
         <button onclick="calcular()">Calcular</button>
@@ -123,13 +135,23 @@
             var centenaInput3 = document.getElementById('centenaInput3').value;
             var centenaInput4 = document.getElementById('centenaInput4').value;
             var centenaInput5 = document.getElementById('centenaInput5').value;
-
+            
+var centenaInput6 = document.getElementById('centenaInput6').value;
+            var centenaInput7 = document.getElementById('centenaInput7').value;
+            var centenaInput8 = document.getElementById('centenaInput8').value;
+            var centenaInput9 = document.getElementById('centenaInput9').value;
+            var centenaInput10 = document.getElementById('centenaInput10').value;
             centenas = []; 
             if (centenaInput1.length === 3) centenas.push(centenaInput1);
             if (centenaInput2.length === 3) centenas.push(centenaInput2);
             if (centenaInput3.length === 3) centenas.push(centenaInput3);
             if (centenaInput4.length === 3) centenas.push(centenaInput4);
             if (centenaInput5.length === 3) centenas.push(centenaInput5);
+            if (centenaInput6.length === 3) centenas.push(centenaInput6);
+            if (centenaInput7.length === 3) centenas.push(centenaInput7);
+            if (centenaInput8.length === 3) centenas.push(centenaInput8);
+            if (centenaInput9.length === 3) centenas.push(centenaInput9);
+            if (centenaInput10.length === 3) centenas.push(centenaInput10);
 
             alert('Centenas adicionadas com sucesso!');
         }
