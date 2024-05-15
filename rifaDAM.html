@@ -30,15 +30,20 @@
 
         li {
             display: inline-block;
-            margin: 5px;
-            padding: 5px;
+            margin: 3px;
+            padding: 4px;
             border: 1px solid #ccc;
             cursor: pointer;
+            font-weight:bold;
+            border-radius:15px;
+            
         }
 
         li.selected {
             background-color: #ffcc00;
+            color:black;
         }
+
 
         button {
             display: block;
@@ -106,6 +111,7 @@
        height:20px;
        border-radius:10px;
        text-align:center;
+       outline:none;
    }
    .nome  {
        
@@ -113,10 +119,23 @@
        width:50%;
        height:20px;
        border-radius:10px;
+       outline:none;
+       text-align:center;
+       color :red;
+       font-weight:bold;
    }
    .sele{
        width:30%;
        height:30px;
+       border-radius:10px;
+       outline:none;
+   }
+   .dzn {
+       width:10%;
+       border-radius:5px;
+       text-align:center;
+       outline:none;
+       
    }
     </style>
 </head>
@@ -124,7 +143,7 @@
 <h1>Rifa DEZENA</h1>
 <div id="rifa">
     <ul id="dezenas"></ul>
-    <input type="number" class="vDezenas" id="valorPorDezena" placeholder="(R$)">
+    <input maxlength="3"type="tel" class="vDezenas" id="valorPorDezena" placeholder="(R$)">
     <input type="text" class="nome"id="whatsappName" placeholder="Nome do destinatário">
     
     <select class="sele"  id="premioSelect">
@@ -145,6 +164,17 @@
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
+           <input class="dzn"maxlength="2" type="tel" id="dezenaExtra" placeholder="EXTRA" required>
+            <input class="dzn"maxlength="2" type="tel" id="dezena2Extra" placeholder="EXTRA" required>
+            
+               <input class="dzn"maxlength="2"type="tel" id="dezena3Extra" placeholder="EXTRA" required>
+            <input class="dzn"maxlength="2"type="tel" id="dezena4Extra" placeholder="EXTRA" required>
+            
+               <input class="dzn"maxlength="2"type="tel" id="dezena5Extra" placeholder="EXTRA" required>
+            <input class="dzn"maxlength="2"type="tel" id="dezena6Extra" placeholder="EXTRA" required>
+            
+      
+                  
         <p>Chave PIX: <span id="pixKey">https://multijogo.github.io/Link-de-pagamento-pix/</span></p>
         <p>Valor a pagar: R$ <span id="valorPagar"></span></p>
         <p>Valor a receber por dezena: R$ <span id="valorReceber"></span></p>
@@ -206,6 +236,15 @@
 
         document.getElementById('enviarWhatsApp').addEventListener('click', function () {
     const nome = document.getElementById('whatsappName').value;
+    const dezenaExtra = document.getElementById("dezenaExtra").value;
+    
+    const dezena2Extra = document.getElementById("dezena2Extra").value;
+    const dezena3Extra = document.getElementById("dezena4Extra").value;
+       const dezena4Extra = document.getElementById("dezena4Extra").value;
+    
+    const dezena5Extra = document.getElementById("dezena5Extra").value;
+    const dezena6Extra = document.getElementById("dezena6Extra").value;
+    
     const titulo = "MULTIJOGO RIFA DE DEZENA";
     let resultado ="https://www.resultadofacil.com.br/resultado-do-jogo-do-bicho/BA";
     const codigoPix = document.getElementById('pixKey').innerText;
@@ -215,24 +254,35 @@
     const premio = premioSelect.options[premioSelect.selectedIndex].text;
     const horario = document.getElementById('horario').innerText;
     const dezenasString = document.getElementById('dezenasSelecionadas').innerText;
+    var responsabilidade = "E de Responsabilidade do Apostador Conferir sua pule antes da Extracao";
+   
+        // Gerar o código de 6 dígitos
+    const codigo = Math.floor(100000 + Math.random() * 900000);
+    
+    const chavePagamento = "https://multijogo.github.io/Link-de-pagamento-pix/";
+    
     
     var mensagem = `*${titulo}*
         
-                    *Olá, ${nome} !*
+          *Olá, => ${nome}*
         
-             *Segue o código PIX* : ${codigoPix} 
+          Chave Pix ${chavePagamento}
                     
-                    *Valor a pagar* : R$ ${totalReceber}
+                    * *Valor a pagar* : => R$ ${totalReceber}
                     
-                    *Valor a receber* : R$ ${totalPagar}
+                    * *Valor a receber* : => R$ ${totalPagar}
                     
-                    *Prêmio* : ${premio}
+                    * *Prêmio* : => ${premio}
                     
-                    *Horário* : ${horario}
+                    * *Horário* : => ${horario}
                     
-     *Dezenas* : ${dezenasString}
-                    
-*RESULTADO* :  ${resultado}`;
+*Dezenas* :=> *( ${dezenasString} )*
+     
+     *Dezena Extra* :=> *( ${dezenaExtra} ),* *( ${dezena2Extra} ),* *( ${dezena3Extra} ),* *( ${dezena4Extra} ),* *( ${dezena5Extra} ),* *( ${dezena6Extra} ),* VALOR DE R$ 60.00
+     
+      Nº Controle da Aposta : *${codigo}*
+     
+     *${responsabilidade}*`;
 
     var mensagemEncoded = encodeURIComponent(mensagem);
     var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
