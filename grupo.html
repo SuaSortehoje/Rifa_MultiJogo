@@ -28,16 +28,20 @@
 
         li {
             display: inline-block;
-            margin: 5px;
-            padding: 5px;
+            margin: 3px;
+            padding: 4px;
             border: 1px solid #ccc;
             cursor: pointer;
-            border-radius: 30px;
+            font-weight:bold;
+            border-radius:15px;
+            
         }
 
         li.selected {
             background-color: #ffcc00;
+            color:black;
         }
+
 
         button {
             display: block;
@@ -93,51 +97,45 @@
             cursor: pointer;
         }
 
-        h1 {
-            animation: h1 1s infinite
-        }
-
-        @keyframes h1 {
+        @keyframes h {
             20% {
                 background-color: red
             }
         }
-
-        .vDezenas {
-            margin-left: 0;
-            width: 20%;
-            height: 20px;
-            border-radius: 10px;
-            text-align: center;
-            outline: none;
-
-        }
-
-        .vDezenas:focus {
-            background: black;
-            color: white;
-        }
-
-        .nome {
-            margin: 5px auto;
-            width: 50%;
-            height: 20px;
-            border-radius: 10px;
-            outline: none;
-            text-align: center;
-        }
-
-        .nome:focus {
-            background: black;
-            color: white;
-        }
-
-        .sele {
-            width: 30%;
-            height: 30px;
-        }
-
-        .jogoBicho {
+   .vDezenas{
+       
+       margin-left:0;
+       width:20%;
+       height:20px;
+       border-radius:10px;
+       text-align:center;
+       outline:none;
+   }
+   .nome  {
+       
+       margin:5px auto;
+       width:50%;
+       height:20px;
+       border-radius:10px;
+       outline:none;
+       text-align:center;
+       color :red;
+       font-weight:bold;
+   }
+   .sele{
+       width:30%;
+       height:30px;
+       border-radius:10px;
+       outline:none;
+   }
+   .dzn {
+       width:10%;
+       border-radius:5px;
+       text-align:center;
+       outline:none;
+       
+   }
+   .jogoBicho {
             width: 100%;
             height: 140px;
             border: 1px solid red
@@ -151,7 +149,7 @@
     <ul id="grupos"></ul>
     <input type="number" class="vDezenas" id="valorPorGrupo" placeholder="">
     <input type="text" class="nome" id="whatsappName" placeholder="Nome do destinatário">
-    <input type="number" class="nome" id="whatsappNumber" placeholder="Número do WhatsApp"><br>
+  <br>
     <select class="sele" id="premioSelect">
         <option value="1">1º Prêmio</option>
         <option value="5">1º ao 5º Prêmio</option>
@@ -169,6 +167,16 @@
 <!-- Modal para a chave PIX e WhatsApp -->
 <div id="myModal" class="modal">
     <div class="modal-content">
+     <input class="dzn"maxlength="2" type="tel" id="dezenaExtra" placeholder="EXTRA" required>
+     
+          <input class="dzn"maxlength="2" type="tel" id="dezena2Extra" placeholder="EXTRA" required>
+            
+               <input class="dzn"maxlength="2"type="tel" id="dezena3Extra" placeholder="EXTRA" required>
+            <input class="dzn"maxlength="2"type="tel" id="dezena4Extra" placeholder="EXTRA" required>
+            
+               <input class="dzn"maxlength="2"type="tel" id="dezena5Extra" placeholder="EXTRA" required>
+            <input class="dzn"maxlength="2"type="tel" id="dezena6Extra" placeholder="EXTRA" required>
+              <input type="number" class="nome" id="whatsappNumber" placeholder="Número do WhatsApp">
         <span class="close">&times;</span>
         <p>Chave PIX: <span id="pixKey">71992290058</span></p>
         <p>Valor a pagar: R$ <span id="valorPagar"></span></p>
@@ -230,6 +238,7 @@
         });
 
         document.getElementById('enviarWhatsApp').addEventListener('click', function () {
+            
             const nome = document.getElementById('whatsappName').value;
             const numero = document.getElementById('whatsappNumber').value;
             const titulo = "MULTIJOGO RIFA DE GRUPO";
@@ -241,14 +250,30 @@
             const premio = premioSelect.options[premioSelect.selectedIndex].text;
             const horario = document.getElementById('horario').innerText;
             const gruposString = document.getElementById('gruposSelecionados').innerText;
-
+            
+var dezenaExtra = document.getElementById("dezenaExtra").value;
+  
+   const dezena2Extra = document.getElementById("dezena2Extra").value;
+    const dezena3Extra = document.getElementById("dezena4Extra").value;
+       const dezena4Extra = document.getElementById("dezena4Extra").value;
+    
+    const dezena5Extra = document.getElementById("dezena5Extra").value;
+    const dezena6Extra = document.getElementById("dezena6Extra").value;
+    var responsabilidade = "E de Responsabilidade do Apostador Conferir sua pule antes da Extracao";
+   
+    
+    var codigo = Math.floor(100000 + Math.random() * 900000);
+    
+    var chavePagamento = "https://multijogo.github.io/Link-de-pagamento-pix/";
+    
+    
             var mensagem = `${linkGrupo}
             
      *${titulo}*
 
                      *Olá, ${nome}!*
 
-         *Segue o código PIX :* ${codigoPix} 
+      Chave Pix ${chavePagamento}
                             
                      *Valor a pagar : R$* ${totalReceber}
                             
@@ -258,7 +283,14 @@
                             
                      *Horário :* ${horario}
                             
-*Grupos :* *${gruposString}* `;
+*Grupos :* *${gruposString}*
+
+*DEZENA EXTRA* :=> *( ${dezenaExtra} ),* *( ${dezena2Extra} ),* *( ${dezena3Extra} ),* *( ${dezena4Extra} ),* *( ${dezena5Extra} ),* *( ${dezena6Extra} ),*  
+     VALOR DE R$ 60.00
+     
+      Nº Controle da Aposta : *${codigo}*
+     
+     *${responsabilidade}*`;
 
             var mensagemEncoded = encodeURIComponent(mensagem);
             var linkWhatsApp = `https://api.whatsapp.com/send?phone=${numero}&text=${mensagemEncoded}`;
