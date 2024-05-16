@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
  <link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen" />
-<title>MULTI CENTENA</title>
+<title>MULTICENTENA</title>
 <link rel="icon" href="https://raw.githubusercontent.com/SuaSortehoje/Rifa_MultiJogo/main/centena.jpeg" type="image/x-icon"> 
     <title>Jogo de Centenas</title>
      <style>
@@ -118,20 +118,21 @@
         <input maxlength="2"type="tel" class="valor" id="valorInput" placeholder="valor"><br>
         <input type="text" id="nomeInput" placeholder="Digite seu nome">
         <select id="horarioInput">
-              <option value="02:00-LN">02:00-LN</option>  
-       <option value="08:00-LN">08:00-LN</option>  
-       <option value="10:00-LN">10:00-LN</option>
-        <option value="10:00">10:00h</option>
-        <option value="12:00-LN">12:00-LN</option>
-        <option value="12:00">12:00h</option>
-       <option value="15:00-LN">15:00-LN</option>
-        <option value="15:00">15:00h</option>
-        <option value="17:00-LN">17:00-LN</option>
-        <option value="19:00">19:00h</option>
-        <option value="20:00-LN">20:00-LN</option>
+         <option value="02:00-LN">02:00h-LN</option>  
+       <option value="08:00h-LN">08:00h-LN</option>  
+       <option value="10:00h-LN">10:00-LN</option>
+        <option value="10:00h-BA">10:00h-BA</option>
+        <option value="12:00h-LN">12:00h-LN</option>
+        <option value="12:00h-BA">12:00h-BA</option>
+       <option value="15:00h-LN">15:00h-LN</option>
+        <option value="15:00h-BA">15:00h-BA</option>
+        <option value="17:00h-LN">17:00h-LN</option>
+        <option value="19:00h-BA">19:00h-BA</option>
+        <option value="20:00h-LN">20:00h-LN</option>
         
-        <option value="21:00">21:00h</option>
-            <option value="23:00-LN">23:00h-LN</option>     </select>
+        <option value="21:00h-BA">21:00h-BA</option>
+            <option value="23:00h-LN">23:00h-LN</option>  
+          </select>
         <select id="premioInput">
             <option value="1ºpremio"> 1º prêmio</option>
             <option value="1ao5">1º ao 5º</option>
@@ -332,14 +333,20 @@ var centenaInput16 = document.getElementById('centenaInput16').value;
 
  let linkCentena ="https://multijogo-38.webnode.page/centenas/";
  
- const responsabilidade = "E de Responsabildade do Apostador Conferir sua pule antes da Extracao";
+var responsabilidade = "E de Responsabilidade do Apostador Conferir sua pule antes da Extracao";
+   
+        // Gerar o código de 6 dígitos
+    const codigo = Math.floor(100000 + Math.random() * 900000);
+    
+    const chavePagamento = "https://multijogo.github.io/Link-de-pagamento-pix/";
+    
  
             var mensagem = `${linkCentena}
           *${titulo}*
             
-                   *Olá* , ${nome} !
+                   *Olá* , ${nome} !              
             
-            *Segue o código PIX :* ${codigoPix}
+          Chave Pix ${chavePagamento}
              
             *Valor a receber :* R$ ${totalReceber}
             
@@ -356,7 +363,8 @@ var centenaInput16 = document.getElementById('centenaInput16').value;
  ${dezena4Extra},  ${dezena5Extra}, 
  ${dezena6Extra},  
          VALOR DE R$ 60.00
-     
+         
+       Nº Controle da Aposta : *${codigo}*
             
 *${responsabilidade}*`;
 
@@ -383,3 +391,4 @@ var centenaInput16 = document.getElementById('centenaInput16').value;
     </script>
 </body>
 </html>
+ 
