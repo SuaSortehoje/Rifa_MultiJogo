@@ -87,6 +87,19 @@
             border: 1px solid #ccc;
             box-sizing: border-box;
     }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -126,13 +139,15 @@
         <input type="tel" id="centenaInput19" placeholder="Digite a centena (3 números)"maxlength="3">
         <input type="tel" id="centenaInput20" placeholder="Digite a centena (3 números)"maxlength="3">   
         <br>
-          <input type="tel" id="numeroInput" placeholder="Digite o número de telefone" required><br>
+        
         <button onclick="adicionarCentena()">Adicionar Centena</button>
         <button onclick="calcular()">Calcular</button>
     </div>
 
     <div id="modal">
         <div id="modal-content">
+          <button class="close" onclick="fecharModal()">&times;</button>
+          <input type="tel" id="numeroInput" placeholder="Digite o número de telefone" required><br>
             <h3>Detalhes do Jogo</h3>
             <p>Nome: <span id="nomePix"></span></p>
             <p>Horário: <span id="horarioPix"></span></p>
@@ -303,6 +318,11 @@ var centenaInput16 = document.getElementById('centenaInput16').value;
             centenasFormatadas = centenasFormatadas.slice(0, -2);
             return centenasFormatadas;
         }
+          function fecharModal() {
+            var modal = document.getElementById('modal');
+            modal.style.display = 'none';
+        }
+
     </script>
 </body>
 </html>
