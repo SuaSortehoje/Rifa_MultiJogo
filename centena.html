@@ -79,12 +79,20 @@
             border: 1px solid #ccc;
             box-sizing: border-box;
     }
+    #numeroInput{
+        width: 70%;
+            padding: 10px;
+            margin-bottom: 2px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+    }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Jogo de Centenas</h2>
-        <input type="number" class="valor" id="valorInput" placeholder="Digite o valor (em centenas)">
+        <input maxlength="2"type="tel" class="valor" id="valorInput" placeholder="valor"><br>
         <input type="text" id="nomeInput" placeholder="Digite seu nome">
         <select id="horarioInput">
             <option value="10h">10h</option>
@@ -118,6 +126,7 @@
         <input type="tel" id="centenaInput19" placeholder="Digite a centena (3 números)"maxlength="3">
         <input type="tel" id="centenaInput20" placeholder="Digite a centena (3 números)"maxlength="3">   
         <br>
+          <input type="tel" id="numeroInput" placeholder="Digite o número de telefone" required><br>
         <button onclick="adicionarCentena()">Adicionar Centena</button>
         <button onclick="calcular()">Calcular</button>
     </div>
@@ -245,6 +254,9 @@ var centenaInput16 = document.getElementById('centenaInput16').value;
 
         function enviarWhatsApp() {
             const titulo = "MULTIJOGO CENTENA";
+            var numero = document.getElementById('numeroInput').value;
+
+            
             var nome = document.getElementById('nomeInput').value;
             var premio = document.getElementById('premioInput').value;
             var horario = document.getElementById('horarioInput').value;
@@ -277,7 +289,7 @@ var centenaInput16 = document.getElementById('centenaInput16').value;
 *${responsabilidade}*`;
 
             var mensagemEncoded = encodeURIComponent(mensagem);
-            var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
+            var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}&phone=${numero}`;
             window.open(linkWhatsApp, '_blank');
         }
 
