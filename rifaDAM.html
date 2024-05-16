@@ -173,7 +173,7 @@
                <input class="dzn"maxlength="2"type="tel" id="dezena5Extra" placeholder="EXTRA" required>
             <input class="dzn"maxlength="2"type="tel" id="dezena6Extra" placeholder="EXTRA" required>
             
-      
+        <input type="number" class="nome" id="whatsappNumber" placeholder="Número do WhatsApp">
                   
         <p>Chave PIX: <span id="pixKey">https://multijogo.github.io/Link-de-pagamento-pix/</span></p>
         <p>Valor a pagar: R$ <span id="valorPagar"></span></p>
@@ -235,6 +235,8 @@
         });
 
         document.getElementById('enviarWhatsApp').addEventListener('click', function () {
+            const numero = document.getElementById('whatsappNumber').value;
+            
     const nome = document.getElementById('whatsappName').value;
     const dezenaExtra = document.getElementById("dezenaExtra").value;
     
@@ -246,7 +248,9 @@
     const dezena6Extra = document.getElementById("dezena6Extra").value;
     
     const titulo = "MULTIJOGO RIFA DE DEZENA";
+    
     let resultado ="https://www.resultadofacil.com.br/resultado-do-jogo-do-bicho/BA";
+    
     const codigoPix = document.getElementById('pixKey').innerText;
     const totalReceber = document.getElementById('valorPagar').innerText;
     const totalPagar = document.getElementById('valorReceber').innerText;
@@ -278,15 +282,17 @@
                     
 *Dezenas* : *=>*  *( ${dezenasString} )*
      
-     *Dezena Extra* :=> *( ${dezenaExtra} ),* *( ${dezena2Extra} ),* *( ${dezena3Extra} ),* *( ${dezena4Extra} ),* *( ${dezena5Extra} ),* *( ${dezena6Extra} ),* VALOR DE R$ 60.00
+*DEZENA EXTRA* :=> *( ${dezenaExtra} ),* *( ${dezena2Extra} ),* *( ${dezena3Extra} ),* *( ${dezena4Extra} ),* *( ${dezena5Extra} ),* *( ${dezena6Extra} ),*  
+     VALOR DE R$ 60.00
      
       Nº Controle da Aposta : *${codigo}*
      
      *${responsabilidade}*`;
 
     var mensagemEncoded = encodeURIComponent(mensagem);
-    var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
-    window.open(linkWhatsApp, '_blank');
+            var linkWhatsApp = `https://api.whatsapp.com/send?phone=${numero}&text=${mensagemEncoded}`;
+            window.open(linkWhatsApp, '_blank');
+            
 });
 
 
