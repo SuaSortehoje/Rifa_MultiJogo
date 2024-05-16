@@ -88,10 +88,12 @@
             box-sizing: border-box;
     }
         .close {
-            color: #aaa;
+            
             float: right;
             font-size: 28px;
             font-weight: bold;
+            background-color:black;
+            color:white;
         }
 
         .close:hover,
@@ -100,6 +102,14 @@
             text-decoration: none;
             cursor: pointer;
         }
+  .dzn {
+       width:10%;
+       border-radius:5px;
+       text-align:center;
+       outline:none;
+       
+   }
+   
     </style>
 </head>
 <body>
@@ -108,12 +118,20 @@
         <input maxlength="2"type="tel" class="valor" id="valorInput" placeholder="valor"><br>
         <input type="text" id="nomeInput" placeholder="Digite seu nome">
         <select id="horarioInput">
-            <option value="10h">10h</option>
-            <option value="12h">12h</option>
-            <option value="15h">15h</option>
-            <option value="19h">19h</option>
-            <option value="21h">21h</option>
-        </select>
+              <option value="02:00-LN">02:00-LN</option>  
+       <option value="08:00-LN">08:00-LN</option>  
+       <option value="10:00-LN">10:00-LN</option>
+        <option value="10:00">10:00h</option>
+        <option value="12:00-LN">12:00-LN</option>
+        <option value="12:00">12:00h</option>
+       <option value="15:00-LN">15:00-LN</option>
+        <option value="15:00">15:00h</option>
+        <option value="17:00-LN">17:00-LN</option>
+        <option value="19:00">19:00h</option>
+        <option value="20:00-LN">20:00-LN</option>
+        
+        <option value="21:00">21:00h</option>
+            <option value="23:00-LN">23:00h-LN</option>     </select>
         <select id="premioInput">
             <option value="1ºpremio"> 1º prêmio</option>
             <option value="1ao5">1º ao 5º</option>
@@ -147,7 +165,32 @@
     <div id="modal">
         <div id="modal-content">
           <button class="close" onclick="fecharModal()">&times;</button>
-          <input type="tel" id="numeroInput" placeholder="Digite o número de telefone" required><br>
+          
+             <input style = "width: 12%;  height:20px; border-radius:5px;
+       text-align:center;
+       outline:none;" class="dzn"maxlength="2" type="tel" id="dezenaExtra" placeholder="EXTRA" required>
+             
+            <input style = "width: 12%;  height:20px; border-radius:5px;
+       text-align:center;
+       outline:none;" style = "width:10%;"class="dzn"maxlength="2" type="tel" id="dezena2Extra" placeholder="EXTRA" required>
+            
+               <input style = "width: 12%;  height:20px; border-radius:5px;
+       text-align:center;
+       outline:none;" style = "width:10%;" class="dzn"maxlength="2"type="tel" id="dezena3Extra" placeholder="EXTRA" required>
+            <input style = "width: 12%;  height:20px; border-radius:5px;
+       text-align:center;
+       outline:none;"  class="dzn"maxlength="2"type="tel" id="dezena4Extra" placeholder="EXTRA" required>
+            
+               <input style = "width: 12%;  height:20px; border-radius:5px;
+       text-align:center;
+       outline:none;" class="dzn"maxlength="2"type="tel" id="dezena5Extra" placeholder="EXTRA" required>
+            <input style = "width: 12%;  height:20px; border-radius:5px;
+       text-align:center;
+       outline:none;" class="dzn"maxlength="2"type="tel" id="dezena6Extra" placeholder="EXTRA" required><br>
+            
+     
+          <input maxlength="14"type="tel" style="margin-left:20px;height:15px;" id="numeroInput" placeholder="Digite o número de telefone" required><br>
+          
             <h3>Detalhes do Jogo</h3>
             <p>Nome: <span id="nomePix"></span></p>
             <p>Horário: <span id="horarioPix"></span></p>
@@ -271,7 +314,14 @@ var centenaInput16 = document.getElementById('centenaInput16').value;
             const titulo = "MULTIJOGO CENTENA";
             var numero = document.getElementById('numeroInput').value;
 
-            
+          const dezenaExtra = document.getElementById("dezenaExtra").value;
+    
+    const dezena2Extra = document.getElementById("dezena2Extra").value;
+    const dezena3Extra = document.getElementById("dezena4Extra").value;
+       const dezena4Extra = document.getElementById("dezena4Extra").value;
+    
+    const dezena5Extra = document.getElementById("dezena5Extra").value;
+    const dezena6Extra = document.getElementById("dezena6Extra").value;  
             var nome = document.getElementById('nomeInput').value;
             var premio = document.getElementById('premioInput').value;
             var horario = document.getElementById('horarioInput').value;
@@ -300,6 +350,13 @@ var centenaInput16 = document.getElementById('centenaInput16').value;
             *Horário :* ${horario}
             
  *Centenas :* ${centenasString}
+ 
+ *DEZENA EXTRA* :=> ${dezenaExtra},
+ ${dezena2Extra},  ${dezena3Extra}, 
+ ${dezena4Extra},  ${dezena5Extra}, 
+ ${dezena6Extra},  
+         VALOR DE R$ 60.00
+     
             
 *${responsabilidade}*`;
 
