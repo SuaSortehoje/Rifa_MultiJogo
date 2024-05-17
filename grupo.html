@@ -155,12 +155,21 @@
         <option value="5">1º ao 5º Prêmio</option>
     </select>
     <select class="sele" id="horarioSelect">
-        <option value="10:00">10:00h</option>
-        <option value="12:00">12:00h</option>
-        <option value="15:00">15:00h</option>
-        <option value="19:00">19:00h</option>
-        <option value="21:00">21:00h</option>
-    </select>
+         <option value="02:00-LN">02:00h-LN</option>  
+       <option value="08:00h-LN">08:00h-LN</option>  
+       <option value="10:00h-LN">10:00-LN</option>
+        <option value="10:00h-BA">10:00h-BA</option>
+        <option value="12:00h-LN">12:00h-LN</option>
+        <option value="12:00h-BA">12:00h-BA</option>
+       <option value="15:00h-LN">15:00h-LN</option>
+        <option value="15:00h-BA">15:00h-BA</option>
+        <option value="17:00h-LN">17:00h-LN</option>
+        <option value="19:00h-BA">19:00h-BA</option>
+        <option value="20:00h-LN">20:00h-LN</option>
+        
+        <option value="21:00h-BA">21:00h-BA</option>
+            <option value="23:00h-LN">23:00h-LN</option>  
+           </select>
     <button id="comprarBtn">Comprar</button>
 </div>
 
@@ -259,7 +268,7 @@ var dezenaExtra = document.getElementById("dezenaExtra").value;
     
     const dezena5Extra = document.getElementById("dezena5Extra").value;
     const dezena6Extra = document.getElementById("dezena6Extra").value;
-    var responsabilidade = "E de Responsabilidade do Apostador Conferir sua pule antes da Extracao";
+    var responsabilidade = "*E de Responsabilidade do Apostador Conferir sua pule antes da Extracao*\n\nBoa Sorte!!\n\n *Dezena Extra valor R$ 50.00*";
    
     
     var codigo = Math.floor(100000 + Math.random() * 900000);
@@ -285,8 +294,7 @@ var dezenaExtra = document.getElementById("dezenaExtra").value;
                             
 *Grupos :* *${gruposString}*
 
-*DEZENA EXTRA* :=> *( ${dezenaExtra} ),* *( ${dezena2Extra} ),* *( ${dezena3Extra} ),* *( ${dezena4Extra} ),* *( ${dezena5Extra} ),* *( ${dezena6Extra} ),*  
-     VALOR DE R$ 60.00
+${dezenaExtra ? '*DEZENA EXTRA* : => *( ' + dezenaExtra + '),* ' : ''}${dezena2Extra ? '*(' + dezena2Extra + ')*, ' : ''}${dezena3Extra ? '*(' + dezena3Extra + ')*, ' : ''}${dezena4Extra ? '*(' + dezena4Extra + ')*, ' : ''}${dezena5Extra ? '*(' + dezena5Extra + ')*, ' : ''}${dezena6Extra ? '*(' + dezena6Extra + ')*, ' : ''}
      
       Nº Controle da Aposta : *${codigo}*
      
