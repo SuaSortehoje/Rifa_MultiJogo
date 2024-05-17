@@ -328,7 +328,8 @@ var centenaInput16 = document.getElementById('centenaInput16').value;
        const dezena4Extra = document.getElementById("dezena4Extra").value;
     
     const dezena5Extra = document.getElementById("dezena5Extra").value;
-    const dezena6Extra = document.getElementById("dezena6Extra").value;  
+    const dezena6Extra = document.getElementById("dezena6Extra").value;
+    
             var nome = document.getElementById('nomeInput').value;
             var premio = document.getElementById('premioInput').value;
             var horario = document.getElementById('horarioInput').value;
@@ -339,8 +340,7 @@ var centenaInput16 = document.getElementById('centenaInput16').value;
 
  let linkCentena ="https://multijogo-38.webnode.page/centenas/";
  
-var responsabilidade = "E de Responsabilidade do Apostador Conferir sua pule antes da Extracao";
-   
+var responsabilidade = "*E de Responsabilidade do Apostador Conferir sua pule antes da Extracao*\n\nBoa Sorte!!\n\n*Dezena Extra valor R$ 50.00*";
         // Gerar o código de 6 dígitos
     const codigo = Math.floor(100000 + Math.random() * 900000);
     
@@ -364,11 +364,7 @@ var responsabilidade = "E de Responsabilidade do Apostador Conferir sua pule ant
             
  *Centenas :* ${centenasString}
  
- *DEZENA EXTRA* : => ${dezenaExtra} -
- ${dezena2Extra} - ${dezena3Extra} - 
- ${dezena4Extra} - ${dezena5Extra} - 
- ${dezena6Extra}, 
-        *(DznExtra valor de R$ 60.00)*
+${dezenaExtra ? '*DEZENA EXTRA* : => *( ' + dezenaExtra + '),* ' : ''}${dezena2Extra ? '*(' + dezena2Extra + ')*, ' : ''}${dezena3Extra ? '*(' + dezena3Extra + ')*, ' : ''}${dezena4Extra ? '*(' + dezena4Extra + ')*, ' : ''}${dezena5Extra ? '*(' + dezena5Extra + ')*, ' : ''}${dezena6Extra ? '*(' + dezena6Extra + ')*, ' : ''}
          
        Nº Controle da Aposta : *${codigo}*
             
