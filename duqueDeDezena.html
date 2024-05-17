@@ -68,6 +68,26 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+           .close {
+            position: absolute;
+            top: 30px;
+            right: 10px;
+            background-color: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+          
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -75,6 +95,7 @@
     <h2>Jogo Duque de Dezena</h2>
     <input type="tel" id="valorInput" placeholder="Digite o valor a receber (em milhares)">
     <input type="text" id="nomeInput" placeholder="Digite seu nome">
+    
     <select id="horarioInput">
         <option value="10h">10h</option>
         <option value="12h">12h</option>
@@ -91,6 +112,7 @@
     <input type="text" value="x" readonly style="width: 20px; text-align: center;">
     <input type="tel" id="duqueInput2" placeholder="Digite o duque de dezena (2 números)" maxlength="2">
  
+    
     <br>
     <button onclick="adicionarDuqueDeDezena()">Adicionar Duque de Dezena</button>
     <button onclick="calcular()">Calcular</button>
@@ -99,6 +121,7 @@
 <div id="modal" style="display: none;">
     <div id="modal-content">
         <h2>Detalhes do Jogo</h2>
+          <button class="close" onclick="fecharModal()">&times;</button>
         <p>Nome: <span id="nomePix"></span></p>
         <p>Horário: <span id="horarioPix"></span></p>
         <p>Duques de Dezena: <span id="duquesDeDezenaPix"></span></p>
@@ -143,7 +166,7 @@
                 if (premio === "1a5premio") {
                     total = valor * 300;
                 } else if (premio === "6a10premio") {
-                    total = valor * 300 ;
+                    total = valor * 300 / 10;
                 } else {
                     total = valor * 300;
                 }
@@ -206,17 +229,17 @@
         var premioText = selecionadoPremio.options[selecionadoPremio.selectedIndex].text;
 
         var multijogo = "MULTIJOGO DUQUE DE DEZENA\n\n";
-        
-        const linkDuqueDedezenas = "https://rifa-de-dezena-5.webnode.page/sobre-mim/";
 
-        var mensagem = `${linkDuqueDedezenas}
-        
-        ${multijogo}*Olá, ${nome}!*\n\n*Segue o código PIX* : ${codigoPix}\n\nValor a receber : R$ ${totalReceber}\n\nValor a receber : R$ ${totalPagar}\n\nPrêmio : ${premioText}\n\nHorário : ${horarioText}.\n\nDuques de Dezena: ${duquesDeDezenaString}`;
+        var mensagem = `${multijogo}*Olá, ${nome}!*\n\n*Segue o código PIX*: ${codigoPix}.\n\nValor a receber: R$ ${totalReceber}.\n\nValor a receber: R$ ${totalPagar}.\n\nPrêmio: ${premioText}.\n\nHorário: ${horarioText}.\n\nDuques de Dezena: ${duquesDeDezenaString}`;
 
         var mensagemEncoded = encodeURIComponent(mensagem);
         var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
         window.open(linkWhatsApp, '_blank');
     }
+    function fecharModal() {
+            var modal = document.getElementById('modal');
+            modal.style.display = 'none';
+        }
 </script>
 </body>
 </html>
