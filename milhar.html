@@ -22,10 +22,10 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        input[type="tel"], select {
-            width: 30%;
+        input[type="tel"] {
+            width: 17%;
             padding: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             border-radius: 5px;
             border: 1px solid #ccc;
             box-sizing: border-box;
@@ -36,13 +36,15 @@
       background-color:black;
       color:white;}
       
-        input[type="text"], select {
+        input[type="text"] {
             width: 70%;
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
             box-sizing: border-box;
+            background-color:black;
+      color:white;
         }
         button {
             padding: 10px 20px;
@@ -74,29 +76,93 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+       
+          .close {
+            position: absolute;
+            top: 110px;
+            right: 10px;
+            background-color: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+          
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #horarioInput{
+            width: 35%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            text-align:center;
+        }
+        #premioInput{
+            width: 35%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            text-align:center;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Jogo de Milhares</h2>
-        <input type="tel" id="valorInput" placeholder="Digite o valor (em milhares)">
+        <input style="width:30%"maxlength="2"type="tel" id="valorInput" placeholder="Digite o valor (em milhares)">
         <input type="text" id="nomeInput" placeholder="Digite seu nome">
         <select id="horarioInput">
-            <option value="10h">10h</option>
-            <option value="12h">12h</option>
-            <option value="15h">15h</option>
-            <option value="19h">19h</option>
-            <option value="21h">21h</option>
-        </select>
+             <option value="02:00-LN">02:00h-LN</option>  
+       <option value="08:00h-LN">08:00h-LN</option>  
+       <option value="10:00h-LN">10:00-LN</option>
+        <option value="10:00h-BA">10:00h-BA</option>
+        <option value="12:00h-LN">12:00h-LN</option>
+        <option value="12:00h-BA">12:00h-BA</option>
+       <option value="15:00h-LN">15:00h-LN</option>
+        <option value="15:00h-BA">15:00h-BA</option>
+        <option value="17:00h-LN">17:00h-LN</option>
+        <option value="19:00h-BA">19:00h-BA</option>
+        <option value="20:00h-LN">20:00h-LN</option>
+        
+        <option value="21:00h-BA">21:00h-BA</option>
+            <option value="23:00h-LN">23:00h-LN</option>     
+              </select>
         <select id="premioInput">
             <option value="premio">1º Prêmio</option>
             <option value="1a5premio">1º ao 5º Prêmio</option>
-        </select>
+        </select><br>
         <input type="tel" id="milharInput1" placeholder="Digite a milhar (4 números)" maxlength="4">
         <input type="tel" id="milharInput2" placeholder="Digite a milhar (4 números)" maxlength="4">
         <input type="tel" id="milharInput3" placeholder="Digite a milhar (4 números)" maxlength="4">
         <input type="tel" id="milharInput4" placeholder="Digite a milhar (4 números)" maxlength="4">
-        <input type="tel" id="milharInput5" placeholder="Digite a milhar (4 números)" maxlength="4">
+    <input type="tel" id="milharInput5" placeholder="Digite a milhar (4 números)" maxlength="4">
+         <input type="tel" id="milharInput6" placeholder="Digite a milhar (4 números)" maxlength="4">
+        <input type="tel" id="milharInput7" placeholder="Digite a milhar (4 números)" maxlength="4">
+        <input type="tel" id="milharInput8" placeholder="Digite a milhar (4 números)" maxlength="4">
+        <input type="tel" id="milharInput9" placeholder="Digite a milhar (4 números)" maxlength="4">
+        <input type="tel" id="milharInput10" placeholder="Digite a milhar (4 números)" maxlength="4">
+          <input type="tel" id="milharInput11" placeholder="Digite a milhar (4 números)" maxlength="4">
+        <input type="tel" id="milharInput12" placeholder="Digite a milhar (4 números)" maxlength="4">
+        <input type="tel" id="milharInput13" placeholder="Digite a milhar (4 números)" maxlength="4">
+        <input type="tel" id="milharInput14" placeholder="Digite a milhar (4 números)" maxlength="4">
+    <input type="tel" id="milharInput15" placeholder="Digite a milhar (4 números)" maxlength="4">
+         <input type="tel" id="milharInput16" placeholder="Digite a milhar (4 números)" maxlength="4">
+        <input type="tel" id="milharInput17" placeholder="Digite a milhar (4 números)" maxlength="4">
+        <input type="tel" id="milharInput18" placeholder="Digite a milhar (4 números)" maxlength="4">
+        <input type="tel" id="milharInput19" placeholder="Digite a milhar (4 números)" maxlength="4">
+        <input type="tel" id="milharInput20" placeholder="Digite a milhar (4 números)" maxlength="4">
+        
         <br>
         <button onclick="adicionarMilhar()">Adicionar Milhar</button>
         <button onclick="calcular()">Calcular</button>
@@ -105,6 +171,8 @@
     <div id="modal">
         <div id="modal-content">
             <h2>Detalhes do Jogo</h2>
+     <button class="close" onclick="fecharModal()">&times;</button>
+                       <input maxlength="14"type="tel" style="width:50%; margin-left:40px; height:25px;" id="numeroInput" placeholder="Digite o número de telefone" required><br>
             <p>Nome: <span id="nomePix"></span></p>
             <p>Horário: <span id="horarioPix"></span></p>
             <p>Milhares: <span id="milharesPix"></span></p>
@@ -125,6 +193,22 @@
             var milharInput3 = document.getElementById('milharInput3').value;
             var milharInput4 = document.getElementById('milharInput4').value;
             var milharInput5 = document.getElementById('milharInput5').value;
+            var milharInput6 = document.getElementById('milharInput6').value;
+            var milharInput7 = document.getElementById('milharInput7').value;
+            var milharInput8 = document.getElementById('milharInput8').value;
+            var milharInput9 = document.getElementById('milharInput9').value;
+            var milharInput10 = document.getElementById('milharInput10').value;
+            var milharInput11 = document.getElementById('milharInput11').value;
+            var milharInput12 = document.getElementById('milharInput12').value;
+            var milharInput13 = document.getElementById('milharInput13').value;
+            var milharInput14 = document.getElementById('milharInput14').value;
+            var milharInput15 = document.getElementById('milharInput15').value;
+            var milharInput16 = document.getElementById('milharInput16').value;
+            var milharInput17 = document.getElementById('milharInput17').value;
+            var milharInput18 = document.getElementById('milharInput18').value;
+            var milharInput19 = document.getElementById('milharInput19').value;
+            var milharInput20 = document.getElementById('milharInput20').value;
+            
 
             milhares = []; // Limpa o array de milhares antes de adicionar novos
             if (milharInput1.length === 4) milhares.push(milharInput1);
@@ -132,9 +216,23 @@
             if (milharInput3.length === 4) milhares.push(milharInput3);
             if (milharInput4.length === 4) milhares.push(milharInput4);
             if (milharInput5.length === 4) milhares.push(milharInput5);
+            if (milharInput6.length === 4) milhares.push(milharInput6);
+            if (milharInput7.length === 4) milhares.push(milharInput7);
+            if (milharInput8.length === 4) milhares.push(milharInput8);
+            if (milharInput9.length === 4) milhares.push(milharInput9);
+            if (milharInput10.length === 4) milhares.push(milharInput10);
+             if (milharInput11.length === 4) milhares.push(milharInput11);
+            if (milharInput12.length === 4) milhares.push(milharInput12);
+            if (milharInput13.length === 4) milhares.push(milharInput13);
+            if (milharInput14.length === 4) milhares.push(milharInput14);
+            if (milharInput15.length === 4) milhares.push(milharInput15);
+            if (milharInput16.length === 4) milhares.push(milharInput16);
+            if (milharInput17.length === 4) milhares.push(milharInput17);
+            if (milharInput18.length === 4) milhares.push(milharInput18);
+            if (milharInput19.length === 4) milhares.push(milharInput19);
+            if (milharInput20.length === 4) milhares.push(milharInput20);
 
-            alert('Milhares adicionados com sucesso!');
-        }
+            alert('Milhares adicionados com sucesso!'); }
 
         function calcular() {
             var valor = document.getElementById('valorInput').value;
@@ -146,8 +244,8 @@
                 valor = parseInt(valor);
                 if (!isNaN(valor)) {
                     var total;
-                    if (premio === "1a5premio") {
-                        total = valor * 4000 / 5;
+         if (premio === "1a5premio") {
+                  total = valor * 4000 / 5;
                     } else {
                         total = valor * 4000;
                     }
@@ -202,15 +300,24 @@
     var totalPagar = document.getElementById('totalPagar').textContent;
     var totalReceber = document.getElementById('totalReceber').textContent;
     var codigoPix = document.getElementById('codigoPix').textContent;
+var numero = document.getElementById('numeroInput').value;
 
     var selecionado = document.getElementById('premioInput');
     var premioText = selecionado.options[selecionado.selectedIndex].text;
- let resultado ="https://www.resultadofacil.com.br/resultado-do-jogo-do-bicho/BA";
+ 
     var multijogo = "MULTIJOGO MILHAR\n\n";
+  
     let linktitulo ="https://multijogo-38.webnode.page/milhar/";
+    
+    
+   
+        // Gerar o código de 6 dígitos
+    const codigo = Math.floor(100000 + Math.random() * 900000);
+    
+const responsabilidade = "E de Responsabilidade do Apostador Conferir sua pule antes da Extracao\n\nBoa Sorte!!!";
 
     var mensagem = `${linktitulo}
-                ${multijogo}
+               
             *Olá,* ${nome}!
          
   *chave Aleatoria pix* : ${codigoPix}
@@ -223,15 +330,20 @@
          
                   *HORÁRIO* : ${horario}
          
-*MILHARES* : ${milharesString}
-    
- *RESULTADO* :  ${resultado}`;
+   *MILHARES* : ${milharesString}
+
+   Nº Controle da Aposta : *${codigo}*
+     
+     *${responsabilidade}*`;
 
     var mensagemEncoded = encodeURIComponent(mensagem);
-    var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
-    window.open(linkWhatsApp, '_blank');
-}
-
+            var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}&phone=${numero}`;
+            window.open(linkWhatsApp, '_blank');
+        }
+function fecharModal() {
+            var modal = document.getElementById('modal');
+            modal.style.display = 'none';
+        }
     </script>
 </body>
 </html>
