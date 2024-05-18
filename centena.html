@@ -140,7 +140,7 @@
             <option value="23:00h-LN">23:00h-LN</option>  
           </select>
         <select id="premioInput">
-            <option value="1ºpremio"> 1º prêmio</option>
+            <option value="1º PREMIO"> 1º  PREMIO</option>
             <option value="1ao5">1º ao 5º</option>
         </select><br>
         <input type="tel" id="centenaInput1" placeholder="Digite a centena (3 números)"maxlength="3">
@@ -301,7 +301,7 @@ var centenaInput16 = document.getElementById('centenaInput16').value;
             totalPagarElement.textContent = totalPagar.toFixed(2);
             totalReceberElement.textContent = totalReceber.toFixed(2); 
 
-            codigoPix.textContent = 'https://multijogo.github.io/Link-de-pagamento-pix/';
+            codigoPix.textContent ='71992290058';
 
             modal.style.display = 'flex';
         }
@@ -340,35 +340,34 @@ var centenaInput16 = document.getElementById('centenaInput16').value;
 
  let linkCentena ="https://multijogo-38.webnode.page/centenas/";
  
-var responsabilidade = "*E de Responsabilidade do Apostador Conferir sua pule antes da Extracao*\n\nBoa Sorte!!\n\n*Dezena Extra valor R$ 50.00*";
+var responsabilidade = "*E de Responsabilidade do Apostador Conferir sua pule antes da Extracao*\n\nBoa Sorte!!\n\n *Dezena Extra valor R$ 50.00*";
+
         // Gerar o código de 6 dígitos
     const codigo = Math.floor(100000 + Math.random() * 900000);
     
     const chavePagamento = "https://multijogo.github.io/Link-de-pagamento-pix/";
     
  
-            var mensagem = `${linkCentena}
-          *${titulo}*
+          var mensagem = `${linkCentena}
+                *${titulo}*
+                
+       *Data : ${new Date().toLocaleDateString()}    /    Hora : ${new Date().toLocaleTimeString()}*    
+       
+*Olá* , ${nome} 
             
-                   *Olá* , ${nome} !              
+            *Valor a pagar* : R$ ${totalPagar}
             
-          Chave Pix ${chavePagamento}
-             
-            *Valor a receber :* R$ ${totalReceber}
+           *Valor a receber* : R$ ${totalReceber}
             
-            *Valor a pagar :* R$ ${totalPagar}
+ *Prêmio* : ${premio}   /  *Extracao* : ${horario}
             
-            *Prêmio :* ${premio}
-            
-            *Horário :* ${horario}
-            
- *Centenas :* ${centenasString}
+ *Centenas* : ${centenasString}
  
 ${dezenaExtra ? '*DEZENA EXTRA* : => *( ' + dezenaExtra + '),* ' : ''}${dezena2Extra ? '*(' + dezena2Extra + ')*, ' : ''}${dezena3Extra ? '*(' + dezena3Extra + ')*, ' : ''}${dezena4Extra ? '*(' + dezena4Extra + ')*, ' : ''}${dezena5Extra ? '*(' + dezena5Extra + ')*, ' : ''}${dezena6Extra ? '*(' + dezena6Extra + ')*, ' : ''}
          
        Nº Controle da Aposta : *${codigo}*
             
-*${responsabilidade}*`;
+${responsabilidade}`;
 
             var mensagemEncoded = encodeURIComponent(mensagem);
             var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}&phone=${numero}`;
