@@ -245,9 +245,9 @@
                 if (!isNaN(valor)) {
                     var total;
          if (premio === "1a5premio") {
-                  total = valor * 2350 / 5;
+                  total = valor * 2500 / 5;
                     } else {
-                        total = valor * 2350;
+                        total = valor * 2500;
                     }
                     var totalPagar = valor * milhares.length; // Multiplica o valor pelo número de milhares digitados
                     showModal(nome, horarioInput, totalPagar, total);
@@ -315,6 +315,7 @@ var numero = document.getElementById('numeroInput').value;
     
 const responsabilidade = "*E de Responsabilidade do Apostador Conferir sua pule antes da Extracao*\n\nBoa Sorte!!!";
 
+ const obs = "jogado R$ 1.00 no 1ºprrmio vale (milhar = 2500) (Centena = 350)";
     var mensagem = `${linktitulo}
        *${multijogo}*
             *Olá,* ${nome}!
@@ -332,7 +333,9 @@ const responsabilidade = "*E de Responsabilidade do Apostador Conferir sua pule 
 *MILHAR e CENTENA* : ${milharesString}
 
    Nº Controle da Aposta : *${codigo}*
-     
+   
+   ${obs}
+   
      ${responsabilidade}`;
 
     var mensagemEncoded = encodeURIComponent(mensagem);
