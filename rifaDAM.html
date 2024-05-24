@@ -149,6 +149,7 @@
     <select class="sele"  id="premioSelect">
         <option value="1">1º Prêmio</option>
         <option value="5">1º ao 5º Prêmio</option>
+          <option value="10">1º ao 10º Prêmio</option>
     </select>
     <select class="sele" id="horarioSelect">
           <option value="02:00-LN">02:00h-LN</option>  
@@ -227,9 +228,14 @@
                 let valorAReceber = totalAPagar * 70;
                 if (premio === 5) {
                     valorAReceber /= 5; // Divide o valor a receber por 5 se a opção for "1º ao 5º Prêmio"
-                } else {
+                } 
+                 else if (premio === 10) {
+                    valorAReceber /= 10; // Divide o valor a receber por 5 se a opção for "1º ao 5º Prêmio"
+                } 
+                else {
                     valorAReceber /= totalDezenas; // Divide o valor a receber pelo número total de dezenas selecionadas
                 }
+                
                 const totalPagar = totalAPagar.toFixed(2);
                 valorAReceber = valorAReceber.toFixed(2);
                 const dezenasArray = Array.from(selecionadas).map(li => li.textContent);
