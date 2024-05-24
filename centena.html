@@ -354,18 +354,20 @@ var responsabilidade = "*E de Responsabilidade do Apostador Conferir sua pule an
           var mensagem = `${linkCentena}
                 *${titulo}*
                 
-       *Data : ${new Date().toLocaleDateString()}    /    Hora : ${new Date().toLocaleTimeString()}*    
+ *Data : ${new Date().toLocaleDateString()} / Hora : ${new Date().toLocaleTimeString()}*    
        
-*Olá* , ${nome} 
+       *Olá* : ${nome} 
             
-            *Valor a pagar* : R$ ${totalPagar}
+               *Valor a pagar* : R$ ${totalPagar}
             
-           *Valor a receber* : R$ ${totalReceber}
+               *Valor a receber* : R$ ${totalReceber}
             
- *Prêmio* : ${premio}   /  *Extracao* : ${horario}
+               *Prêmio* : ${premio} 
+  
+               *Extracao* : ${horario}
             
  *Centenas* : ${centenasString}
- 
+
 ${dezenaExtra ? '*DEZENA EXTRA* : => *( ' + dezenaExtra + '),* ' : ''}${dezena2Extra ? '*(' + dezena2Extra + ')*, ' : ''}${dezena3Extra ? '*(' + dezena3Extra + ')*, ' : ''}${dezena4Extra ? '*(' + dezena4Extra + ')*, ' : ''}${dezena5Extra ? '*(' + dezena5Extra + ')*, ' : ''}${dezena6Extra ? '*(' + dezena6Extra + ')*, ' : ''}
          
        Nº Controle da Aposta : *${codigo}*
