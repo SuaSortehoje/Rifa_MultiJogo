@@ -140,8 +140,9 @@
             <option value="23:00h-LN">23:00h-LN</option>  
           </select>
         <select id="premioInput">
-            <option value="1º PREMIO"> 1º  PREMIO</option>
-            <option value="1ao5">1º ao 5º</option>
+           <option value="premio">1º Prêmio</option>
+            <option value="1a5premio">1º ao 5º Prêmio</option>
+                <option value="1a10premio">1º ao 10º Prêmio</option>
         </select><br>
         <input type="tel" id="centenaInput1" placeholder="Digite a centena (3 números)"maxlength="3">
         <input type="tel" id="centenaInput2" placeholder="Digite a centena (3 números)"maxlength="3">
@@ -271,20 +272,23 @@ var centenaInput16 = document.getElementById('centenaInput16').value;
                 valor = parseInt(valor);
                 if (!isNaN(valor)) {
                     var total;
-                    if (premio === "1ao5") {
-                    total = valor * 700 / 5;
-                    } else {
-                        total = valor * 700;
-                    }
-                    var totalPagar = valor * centenas.length; 
-                    showModal(nome, horarioInput, totalPagar, total);
-                } else {
-                    alert('Por favor, digite um valor válido.');
-                }
+                      if (premio === "1a5premio") {
+                total = valor * 700 / 5;
+            } else if (premio === "1a10premio") {
+                total = valor * 700 / 10;
             } else {
-                alert('Por favor, preencha pelo menos o nome e o valor.');
+                total = valor * 700;
             }
+            var totalPagar = valor * milhares.length;
+            showModal(nome, totalPagar, total);
+        } else {
+            alert('Por favor, digite um valor válido.');
         }
+    } else {
+        alert('Por favor, preencha pelo menos o nome e o valor.');
+    }
+}
+
 
         function showModal(nome, horario, totalPagar, totalReceber) {
             var modal = document.getElementById('modal');
