@@ -263,24 +263,24 @@ var centenaInput16 = document.getElementById('centenaInput16').value;
         }
 
         function calcular() {
-            var valor = document.getElementById('valorInput').value;
-            var nome = document.getElementById('nomeInput').value;
-            var premio = document.getElementById('premioInput').value;
-            var horarioInput = document.getElementById('horarioInput').value;
+    var valor = document.getElementById('valorInput').value;
+    var nome = document.getElementById('nomeInput').value;
+    var premio = document.getElementById('premioInput').value;
+    var horarioInput = document.getElementById('horarioInput').value;
 
-            if (nome && valor) { 
-                valor = parseInt(valor);
-                if (!isNaN(valor)) {
-                    var total;
-                      if (premio === "1a5premio") {
+    if (nome && valor) { 
+        valor = parseInt(valor);
+        if (!isNaN(valor)) {
+            var total;
+            if (premio === "1a5premio") {
                 total = valor * 700 / 5;
             } else if (premio === "1a10premio") {
                 total = valor * 700 / 10;
             } else {
                 total = valor * 700;
             }
-            var totalPagar = valor * milhares.length;
-            showModal(nome, totalPagar, total);
+            var totalPagar = valor * centenas.length; // corrigindo aqui
+            showModal(nome, horarioInput, totalPagar, total); // corrigindo aqui
         } else {
             alert('Por favor, digite um valor válido.');
         }
@@ -288,7 +288,6 @@ var centenaInput16 = document.getElementById('centenaInput16').value;
         alert('Por favor, preencha pelo menos o nome e o valor.');
     }
 }
-
 
         function showModal(nome, horario, totalPagar, totalReceber) {
             var modal = document.getElementById('modal');
