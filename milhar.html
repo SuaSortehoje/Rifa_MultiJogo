@@ -241,17 +241,18 @@
             var premio = document.getElementById('premioInput').value;
             var horarioInput = document.getElementById('horarioInput').value;
 
-            if (nome && valor) { // Verifica se pelo menos um nome e um valor foram inseridos
+            if (nome && valor) {
                 valor = parseInt(valor);
                 if (!isNaN(valor)) {
                     var total;
-         if (premio === "1a5premio") {
-                  total = valor * 5000 / 5;
-                    }if else(premio === "1a10premio"){total = valor *5000 /10;
-         else {
+        if (premio === "1a5premio") {
+                        total = valor * 5000 / 5;
+                    } else if (premio === "1a10premio") {
+                        total = valor * 5000 / 10;
+                    } else {
                         total = valor * 5000;
                     }
-                    var totalPagar = valor * milhares.length; // Multiplica o valor pelo número de milhares digitados
+                    var totalPagar = valor * milhares.length;
                     showModal(nome, horarioInput, totalPagar, total);
                 } else {
                     alert('Por favor, digite um valor válido.');
@@ -349,4 +350,3 @@ function fecharModal() {
     </script>
 </body>
 </html>
- 
