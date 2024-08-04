@@ -97,11 +97,11 @@
     <input type="text" id="nomeInput" placeholder="Digite seu nome">
     
     <select id="horarioInput">
-        <option value="10h">10h</option>
-        <option value="12h">12h</option>
-        <option value="15h">15h</option>
-        <option value="19h">19h</option>
-        <option value="21h">21h</option>
+        <option value="10:00">10:00h</option>
+        <option value="12:00">12:00h</option>
+        <option value="15:00">15:00h</option>
+        <option value="19:00">19:00h</option>
+        <option value="21:00">21:00h</option>
     </select>
     <select id="premioInput">
     
@@ -211,6 +211,8 @@
         window.getSelection().removeAllRanges();
         alert('Código PIX copiado!');
     }
+let linktitulo ="https://multijogo-38.webnode.page/duque-de-dezena/";
+   
 
     function enviarWhatsApp() {
         var nome = document.getElementById('nomeInput').value;
@@ -230,7 +232,9 @@
 
         var multijogo = "MULTIJOGO DUQUE DE DEZENA\n\n";
 
-        var mensagem = `${multijogo}*Olá, ${nome}!*\n\n*Segue o código PIX*: ${codigoPix}.\n\nValor a receber: R$ ${totalReceber}.\n\nValor a receber: R$ ${totalPagar}.\n\nPrêmio: ${premioText}.\n\nHorário: ${horarioText}.\n\nDuques de Dezena: ${duquesDeDezenaString}`;
+        var mensagem = `${linktitulo}
+        
+        ${multijogo}*Olá, ${nome}!*\n\nValor a Apagar: R$ ${totalPagar}\n\nValor a receber: R$ ${totalReceber}.\n\nPrêmio: ${premioText}.\n\nHorário: ${horarioText}.\n\nDuques de Dezena: ${duquesDeDezenaString}`;
 
         var mensagemEncoded = encodeURIComponent(mensagem);
         var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}`;
@@ -240,6 +244,25 @@
             var modal = document.getElementById('modal');
             modal.style.display = 'none';
         }
+        function verificarHorarios() {
+            var horariosSelect = document.getElementById('horarioInput');
+            var agora = new Date();
+            var opcoes = horariosSelect.options;
+
+            for (var i = 0; i < opcoes.length; i++) {
+                var horario = opcoes[i].value.split('-')[0];
+                var [hora, minuto] = horario.split(':').map(Number);
+                var horarioData = new Date();
+                horarioData.setHours(hora, minuto, 0, 0);
+
+                if (horarioData < agora) {
+                    opcoes[i].disabled = true;
+                }
+            }
+        }
+
+        // Verificar horários ao carregar a página
+        document.addEventListener('DOMContentLoaded', verificarHorarios);
 </script>
 </body>
 </html>
