@@ -269,11 +269,14 @@ function showModal(nome, horario, totalPagar, totalReceber) {
 
             const obs = "Apostando R$ 1.00 no 1ºpremio vale (milhar = 2500) (Centena = 350)";
             var mensagem = `${linktitulo}
-                *${multijogo}*
-                *Olá,* ${nome}!
-                 DATA E HORA ATUAL
+          *${multijogo}*
+*Olá,* ${nome}
+                
+                    DATA E HORA ATUAL
   *Data: ${new Date().toLocaleDateString()}*       *Hora: ${new Date().toLocaleTimeString()}*
-                *chave Aleatoria pix* : ${codigoPix}
+  
+           *chave pix Aleatoria*
+            ${codigoPix}
                 
                 *VALOR A PAGAR* : R$ ${totalPagar}        
                 
@@ -287,7 +290,7 @@ function showModal(nome, horario, totalPagar, totalReceber) {
 
                 Nº Controle da Aposta : *${codigo}*
 
-                ${obs}
+  ${obs}
 
                 ${responsabilidade}`;
 
