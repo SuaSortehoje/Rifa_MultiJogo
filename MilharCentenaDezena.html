@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Multijogo x5</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 10px;
+      background-color: #ff000a;
+    }
+    .container {
+      max-width: 400px;
+      margin: auto;
+      background: black;
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    h3 {
+      margin-top: 20px;
+      text-align:center;
+    }
+    input, select, button {
+      padding: 10px;
+      margin: 2px 0;
+      width:100%;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    input.numero {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .resultado {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    button {
+      background-color: #25d366;
+      color: white;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #128c7e;
+    }
+    .grupo {
+      border: 1px solid #ddd;
+      padding: 5px;
+      background: grey;
+      border-radius: 6px;
+      width: 30%;
+      box-sizing: border-box;
+      display: inline-block;
+      margin: 1%;
+      vertical-align: top;
+    }
+    .add-btn {
+      background-color: #007bff;
+      color: white;
+      width: 100%;
+      margin-top: 5px;
+    }
+    .add-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Multijogo x5</h2>
+    <input type="text" id="nomeInput" placeholder="Seu nome" required>
+    <input type="tel" id="numeroInput" placeholder="Número WhatsApp com DDD (somente números)" required>
+
+    <select id="horarioInput">
+      <option value="PROXIMO EXTRACAO">HORARIO</option>
+      <option value="02:00-LN">02:00h-LN</option>
+      <option value="08:00-LN">08:00h-LN</option>
+      <option value="10:00-LN">10:00-LN</option>
+      <option value="10:00-BA">10:00h-BA</option>
+      <option value="12:00-LN">12:00h-LN</option>
+      <option value="12:00-BA">12:00h-BA</option>
+      <option value="15:00-LN">15:00h-LN</option>
+      <option value="15:00-BA">15:00h-BA</option>
+      <option value="17:00-LN">17:00h-LN</option>
+      <option value="19:00-BA">19:00h-BA</option>
+      <option value="20:00-LN">20:00h-LN</option>
+      <option value="21:00-BA">21:00h-BA</option>
+      <option value="23:00-LN">23:00h-LN</option>
+    </select>
+
+    <h3>Milhar</h3>
+    <input type="number" id="valorMilhar" placeholder="Valor único da milhar" step="0.01" oninput="calcularTotal()" />
+    <div id="milharContainer"></div>
+    <button type="button" class="add-btn" onclick="adicionarCampos('milhar', 5)">+ Adicionar 5 Milhar</button>
+
+    <h3>Centena</h3>
+    <input type="number" id="valorCentena" placeholder="Valor único da centena" step="0.01" oninput="calcularTotal()" />
+    <div id="centenaContainer"></div>
+    <button type="button" class="add-btn" onclick="adicionarCampos('centena', 5)">+ Adicionar 5 Centena</button>
+
+    <h3>Dezena</h3>
+    <input type="number" id="valorDezena" placeholder="Valor único da dezena" step="0.01" oninput="calcularTotal()" />
+    <div id="dezenaContainer"></div>
+    <button type="button" class="add-btn" onclick="adicionarCampos('dezena', 5)">+ Adicionar 5 Dezena</button>
+
+    <div class="resultado">
+      Total a Pagar: R$ <span id="totalPagar">0.00</span><br>
+      Total a Receber: R$ <span id="totalReceber">0.00</span>
+    </div>
+
+    <button onclick="enviarWhatsApp()">Enviar via WhatsApp</button>
+  </div>
+
+  <script>
+    const valoresPremio = {
+      milhar: 5000,
+      centena: 700,
+      dezena: 70
+    };
+
+    function adicionarCampos(tipo, quantidade) {
+      const container = document.getElementById(tipo + 'Container');
+      for (let i = 0; i < quantidade; i++) {
+        const grupo = document.createElement('div');
+        grupo.className = 'grupo';
+
+        const inputNumero = document.createElement("input");
+        inputNumero.type = "tel";
+        inputNumero.placeholder = `${tipo} número`;
+        inputNumero.className = "numero";
+        inputNumero.style.background = "black";
+        inputNumero.style.color = "white";
+        inputNumero.style.textAlign = "center";
+        inputNumero.maxLength = tipo === 'milhar' ? 4 : tipo === 'centena' ? 3 : 2;
+        inputNumero.oninput = function () {
+          const max = inputNumero.maxLength;
+          if (inputNumero.value.length > max) {
+            inputNumero.value = inputNumero.value.slice(0, max);
+          }
+          calcularTotal();
+        };
+
+        const selectPremio = document.createElement("select");
+        selectPremio.innerHTML = `
+          <option value="1">1º Prêmio</option>
+          <option value="5">1º ao 5º</option>
+          <option value="10">1º ao 10º</option>
+        `;
+        selectPremio.onchange = calcularTotal;
+
+        grupo.appendChild(inputNumero);
+        grupo.appendChild(selectPremio);
+        container.appendChild(grupo);
+      }
+    }
+
+    function calcularTotal() {
+      let totalPagar = 0;
+      let totalReceber = 0;
+
+      ['milhar', 'centena', 'dezena'].forEach(tipo => {
+        const container = document.getElementById(tipo + 'Container');
+        const grupos = container.querySelectorAll('.grupo');
+        const valorUnico = parseFloat(document.getElementById("valor" + tipo.charAt(0).toUpperCase() + tipo.slice(1)).value) || 0;
+
+        grupos.forEach(grupo => {
+          const numero = grupo.querySelector('.numero').value.trim();
+          const divisao = parseInt(grupo.querySelector('select').value);
+
+          if (numero && valorUnico > 0) {
+            totalPagar += valorUnico;
+            const premioUnitario = valoresPremio[tipo] / divisao;
+            totalReceber += premioUnitario * valorUnico;
+          }
+        });
+      });
+
+      document.getElementById("totalPagar").textContent = totalPagar.toFixed(2);
+      document.getElementById("totalReceber").textContent = totalReceber.toFixed(2);
+    }
+
+    function enviarWhatsApp() {
+      calcularTotal();
+      const nome = document.getElementById("nomeInput").value;
+      const numero = document.getElementById("numeroInput").value;
+      const horario = document.getElementById("horarioInput").value;
+      const totalPagar = document.getElementById("totalPagar").textContent;
+      const totalReceber = document.getElementById("totalReceber").textContent;
+      const data = new Date();
+      const codigo = Math.floor(100000 + Math.random() * 900000);
+
+      let msg = `*MULTIJOGO x5*\n*Nome:* ${nome}\n*Data:* ${data.toLocaleDateString()} ${data.toLocaleTimeString()}\n*Horário:* ${horario}\n\n`;
+
+      ['milhar', 'centena', 'dezena'].forEach(tipo => {
+        const container = document.getElementById(tipo + 'Container');
+        const grupos = container.querySelectorAll('.grupo');
+        const valorUnico = parseFloat(document.getElementById("valor" + tipo.charAt(0).toUpperCase() + tipo.slice(1)).value) || 0;
+
+        if (grupos.length > 0) msg += `*${tipo.toUpperCase()}*\n`;
+
+        grupos.forEach(grupo => {
+          const numero = grupo.querySelector('.numero').value.trim();
+          const divisao = grupo.querySelector('select').value;
+
+          if (numero && valorUnico > 0) {
+            msg += `• ${numero} - R$${valorUnico.toFixed(2)} / ${divisao}º prêmio\n`;
+          }
+        });
+
+        msg += '\n';
+      });
+
+      msg += `*Total a Pagar:* R$ ${totalPagar}\n*Total a Receber:* R$ ${totalReceber}\n*Nº Controle:* ${codigo}\n\nBoa sorte!`;
+
+      const whatsappURL = `https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(msg)}`;
+      window.open(whatsappURL, "_blank");
+    }
+
+    // Adiciona os primeiros 5 campos automaticamente
+    ['milhar', 'centena', 'dezena'].forEach(tipo => adicionarCampos(tipo, 5));
+  </script>
+</body>
+</html>
