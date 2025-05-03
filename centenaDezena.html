@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Milhares</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="tel"] {
+            width: 17%;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            background-color: black;
+            color: white;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #00d0ff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #00aacc;
+        }
+        #modal {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+        #modal-content {
+            background-color: black;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .close {
+            position: absolute;
+            top: 110px;
+            right: 10px;
+            background-color: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #horarioInput, #premioInput {
+            width: 35%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Jogo Centena e dezena</h2>
+        <input style="width:30%" type="tel" id="valorInput" placeholder="Digite o valor (em milhares)" maxlength="4">
+        <input type="text" id="nomeInput" placeholder="Digite seu nome">
+        <select id="horarioInput">
+           <option value="PROXIMO EXTRACAO">HORARIO</option>
+            <option value="02:00-LN">02:00h-LN</option>
+            <option value="08:00-LN">08:00h-LN</option>
+            <option value="10:00-LN">10:00-LN</option>
+            <option value="10:00-BA">10:00h-BA</option>
+            <option value="12:00-LN">12:00h-LN</option>
+            <option value="12:00-BA">12:00h-BA</option>
+            <option value="15:00-LN">15:00h-LN</option>
+            <option value="15:00-BA">15:00h-BA</option>
+            <option value="17:00-LN">17:00h-LN</option>
+            <option value="19:00-BA">19:00h-BA</option>
+            <option value="20:00-LN">20:00h-LN</option>
+            <option value="21:00-BA">21:00h-BA</option>
+            <option value="23:00-LN">23:00h-LN</option>
+        </select>
+        <select id="premioInput">
+            <option value="premio">1º Prêmio</option>
+            <option value="1a5premio">1º ao 5º Prêmio</option>
+            <option value="1a10premio">1º ao 10º Prêmio</option>
+        </select><br>
+        <input type="tel" id="milharInput1" placeholder="Digite a milhar (4 números)" maxlength="3">
+        <input type="tel" id="milharInput2" placeholder="Digite a milhar (4 números)" maxlength="3">
+        <input type="tel" id="milharInput3" placeholder="Digite a milhar (4 números)" maxlength="3">
+        <input type="tel" id="milharInput4" placeholder="Digite a milhar (4 números)" maxlength="3">
+        <input type="tel" id="milharInput5" placeholder="Digite a milhar (4 números)" maxlength="3">
+        <input type="tel" id="milharInput6" placeholder="Digite a milhar (4 números)" maxlength="3">
+        <input type="tel" id="milharInput7" placeholder="Digite a milhar (4 números)" maxlength="3">
+        <input type="tel" id="milharInput8" placeholder="Digite a milhar (4 números)" maxlength="3">
+        <input type="tel" id="milharInput9" placeholder="Digite a milhar (4 números)" maxlength="3">
+        <input type="tel" id="milharInput10" placeholder="Digite a milhar (4 números)" maxlength="3">
+        <input type="tel" id="milharInput11" placeholder="Digite a milhar (4 números)" maxlength="3">
+        <input type="tel" id="milharInput12" placeholder="Digite a milhar (4 números)" maxlength="4">
+        <input type="tel" id="milharInput13" placeholder="Digite a milhar (4 números)" maxlength="3">
+        <input type="tel" id="milharInput14" placeholder="Digite a milhar (4 números)" maxlength="3">
+        <input type="tel" id="milharInput15" placeholder="Digite a milhar (4 números)" maxlength="3">
+        <input type="tel" id="milharInput16" placeholder="Digite a milhar (4 números)" maxlength="3">
+        <input type="tel" id="milharInput17" placeholder="Digite a milhar (4 números)" maxlength="3">
+        <input type="tel" id="milharInput18" placeholder="Digite a milhar (4 números)" maxlength="3">
+        <input type="tel" id="milharInput19" placeholder="Digite a milhar (4 números)" maxlength="3">
+        <input type="tel" id="milharInput20" placeholder="Digite a milhar (3 números)" maxlength="3">
+        <br>
+        <button onclick="adicionarMilhar()">Adicionar centena e dezena</button>
+        <button onclick="calcular()">Calcular</button>
+    </div>
+
+    <div id="modal">
+        <div id="modal-content">
+            <h2>Detalhes do Jogo</h2>
+            <button class="close" onclick="fecharModal()">&times;</button>
+            <input maxlength="14" type="tel" style="width:50%; margin-left:40px; height:25px;" id="numeroInput" placeholder="Digite o número de telefone" required><br>
+            <p>Nome: <span id="nomePix"></span></p>
+            <p>Horário: <span id="horarioPix"></span></p>
+            <p>Milhares: <span id="milharesPix"></span></p>
+            <p>Total a Pagar: R$ <span id="totalPagar"></span></p>
+            <p>Total a Receber: R$ <span id="totalReceber"></span></p>
+            <p>Código PIX: <span id="codigoPix"></span></p>
+            <button onclick="copyPix()">Copiar PIX</button>
+            <button onclick="enviarWhatsApp()">Enviar por WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        var milhares = [];
+
+        function adicionarMilhar() {
+            for (var i = 1; i <= 20; i++) {
+                var milharInput = document.getElementById('milharInput' + i);
+                if (milharInput.value.length === 3) {
+                    milhares.push(milharInput.value);
+                }
+            }
+            if (milhares.length > 0) {
+                document.getElementById('botaoCalcular').disabled = false;
+            }
+            alert('Milhares adicionados com sucesso!');
+        }
+
+        function calcular() {
+    var valor = document.getElementById('valorInput').value;
+    var nome = document.getElementById('nomeInput').value;
+    var premio = document.getElementById('premioInput').value;
+    var horarioInput = document.getElementById('horarioInput').value;
+
+    if (nome && valor) {
+        valor = parseFloat(valor);
+        if (!isNaN(valor)) {
+            var total;
+            var valorEmCentavos = valor * 100; // Convertendo para centavos
+
+            if (premio === "1a5premio") {
+                total = (valorEmCentavos * 385 / 5) / 100;
+            } else if (premio === "1a10premio") {
+                total = (valorEmCentavos * 385 / 10) / 100;
+            } else {
+                total = valorEmCentavos * 385 / 100; // Total em reais
+            }
+
+            var totalPagar = valorEmCentavos * milhares.length / 100; // Total a pagar em reais
+            showModal(nome, horarioInput, totalPagar, total);
+        } else {
+            alert('Por favor, digite um valor válido.');
+        }
+    } else {
+        alert('Por favor, preencha pelo menos o nome e o valor.');
+    }
+}
+
+function showModal(nome, horario, totalPagar, totalReceber) {
+    var modal = document.getElementById('modal');
+    var nomePix = document.getElementById('nomePix');
+    var horarioPix = document.getElementById('horarioPix');
+    var milharesPix = document.getElementById('milharesPix');
+    var totalPagarElement = document.getElementById('totalPagar');
+    var totalReceberElement = document.getElementById('totalReceber');
+    var codigoPix = document.getElementById('codigoPix');
+
+    nomePix.textContent = nome;
+    horarioPix.textContent = horario;
+    milharesPix.textContent = milhares.join(', ');
+
+    totalPagarElement.textContent = totalPagar.toFixed(2);
+    totalReceberElement.textContent = totalReceber.toFixed(2);
+
+    modal.style.display = 'flex';
+}
+
+        function copyPix() {
+            var codigoPix = document.getElementById('codigoPix');
+            var range = document.createRange();
+            range.selectNode(codigoPix);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+            alert('Código PIX copiado!');
+        }
+
+        function enviarWhatsApp() {
+            var nome = document.getElementById('nomeInput').value;
+            var valor = document.getElementById('valorInput').value;
+            var premio = document.getElementById('premioInput').value;
+            var horario = document.getElementById('horarioInput').value;
+            var milharesString = milhares.join(', ');
+            var totalPagar = document.getElementById('totalPagar').textContent;
+            var totalReceber = document.getElementById('totalReceber').textContent;
+            var codigoPix = document.getElementById('codigoPix').textContent;
+            var numero = document.getElementById('numeroInput').value;
+
+            var selecionado = document.getElementById('premioInput');
+            var premioText = selecionado.options[selecionado.selectedIndex].text;
+
+            var multijogo = "MULTIJOGO x5\n             CENTENA e DEZENA";
+
+            let linktitulo = "";
+
+            const codigo = Math.floor(100000 + Math.random() * 900000);
+            
+            const responsabilidade = "*E de Responsabilidade do Apostador Conferir sua pule antes da Extracao*\n\nBoa Sorte!!!";
+
+           
+            var mensagem = `${linktitulo}
+            
+                            *${multijogo}*
+     *Olá,* ${nome}
+                
+                DATA E HORA ATUAL
+  *Data: ${new Date().toLocaleDateString()}*       *Hora: ${new Date().toLocaleTimeString()}*
+                
+     *VALOR A PAGAR* : R$ ${totalPagar}        
+                
+  *VALOR A RECEBER* : R$ ${totalReceber}
+                
+      *PREMIO* : ${premioText}
+                
+             *HORÁRIO* : ${horario}
+                
+ *CENTENA e DEZENA* : ${milharesString}
+
+   Nº Controle da Aposta : *${codigo}*
+
+          ${responsabilidade}`;
+
+            var mensagemEncoded = encodeURIComponent(mensagem);
+            var linkWhatsApp = `https://api.whatsapp.com/send?text=${mensagemEncoded}&phone=${numero}`;
+            window.open(linkWhatsApp, '_blank');
+        }
+
+        function fecharModal() {
+            var modal = document.getElementById('modal');
+            modal.style.display = 'none';
+        }
+
+        function verificarHorarios() {
+            var horariosSelect = document.getElementById('horarioInput');
+            var agora = new Date();
+            var opcoes = horariosSelect.options;
+
+            for (var i = 0; i < opcoes.length; i++) {
+                var horario = opcoes[i].value.split('-')[0];
+                var [hora, minuto] = horario.split(':').map(Number);
+                var horarioData = new Date();
+                horarioData.setHours(hora, minuto, 0, 0);
+
+                if (horarioData < agora) {
+                    opcoes[i].disabled = true;
+                }
+            }
+        }
+
+        // Verificar horários ao carregar a página
+        document.addEventListener('DOMContentLoaded', verificarHorarios);
+    </script>
+</body>
+          </html>
