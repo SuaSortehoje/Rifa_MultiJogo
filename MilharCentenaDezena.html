@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Multijogo x5</title>
+  <title>PLAY LINK</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 10px;
+      text-align:center;
       background-color: #ff000a;
     }
     .container {
@@ -25,7 +26,7 @@
     input, select, button {
       padding: 10px;
       margin: 2px 0;
-      width:100%;
+      width:90%;
       border-radius: 4px;
       border: 1px solid #ccc;
     }
@@ -35,6 +36,7 @@
     }
     .resultado {
       margin-top: 15px;
+      text-align:center;
       font-weight: bold;
     }
     button {
@@ -72,27 +74,25 @@
 </head>
 <body>
   <div class="container">
-    <h2>Multijogo x5</h2>
+    <h2>PLAYER LINK</h2>
     <input type="text" id="nomeInput" placeholder="Seu nome" required>
-    <input type="tel" id="numeroInput" placeholder="Número WhatsApp com DDD (somente números)" required>
+    <input type="tel" id="numeroInput" placeholder="WhatsApp com DDD (somente números)" required>
 
     <select id="horarioInput">
-      <option value="PROXIMO EXTRACAO">HORARIO</option>
-      <option value="02:00-LN">02:00h-LN</option>
-      <option value="08:00-LN">08:00h-LN</option>
-      <option value="10:00-LN">10:00-LN</option>
-      <option value="10:00-BA">10:00h-BA</option>
-      <option value="12:00-LN">12:00h-LN</option>
-      <option value="12:00-BA">12:00h-BA</option>
-      <option value="15:00-LN">15:00h-LN</option>
-      <option value="15:00-BA">15:00h-BA</option>
-      <option value="17:00-LN">17:00h-LN</option>
-      <option value="19:00-BA">19:00h-BA</option>
-      <option value="20:00-LN">20:00h-LN</option>
-      <option value="21:00-BA">21:00h-BA</option>
-      <option value="23:00-LN">23:00h-LN</option>
-    </select>
-
+           <option value="PROXIMO EXTRACAO">HORARIO</option>
+            
+            
+            <option value="10:00-BA">10:00h-BA</option>
+          
+            <option value="12:00-BA">12:00h-BA</option>
+            
+            <option value="15:00-BA">15:00h-BA</option>
+            
+            <option value="19:00-BA">19:00h-BA</option>
+            
+            <option value="21:00-BA">21:00h-BA</option>
+            
+        </select>
     <h3>Milhar</h3>
     <input type="number" id="valorMilhar" placeholder="Valor único da milhar" step="0.01" oninput="calcularTotal()" />
     <div id="milharContainer"></div>
@@ -108,6 +108,11 @@
     <div id="dezenaContainer"></div>
     <button type="button" class="add-btn" onclick="adicionarCampos('dezena', 5)">+ Adicionar 5 Dezena</button>
 
+    <h3>Grupo</h3>
+    <input type="number" id="valorGrupo" placeholder="Valor único do grupo" step="0.01" oninput="calcularTotal()" />
+    <div id="grupoContainer"></div>
+    <button type="button" class="add-btn" onclick="adicionarCampos('grupo', 5)">+ Adicionar 5 Grupo</button>
+
     <div class="resultado">
       Total a Pagar: R$ <span id="totalPagar">0.00</span><br>
       Total a Receber: R$ <span id="totalReceber">0.00</span>
@@ -120,7 +125,8 @@
     const valoresPremio = {
       milhar: 5000,
       centena: 700,
-      dezena: 70
+      dezena: 70,
+      grupo: 18
     };
 
     function adicionarCampos(tipo, quantidade) {
@@ -138,9 +144,8 @@
         inputNumero.style.textAlign = "center";
         inputNumero.maxLength = tipo === 'milhar' ? 4 : tipo === 'centena' ? 3 : 2;
         inputNumero.oninput = function () {
-          const max = inputNumero.maxLength;
-          if (inputNumero.value.length > max) {
-            inputNumero.value = inputNumero.value.slice(0, max);
+          if (inputNumero.value.length > inputNumero.maxLength) {
+            inputNumero.value = inputNumero.value.slice(0, inputNumero.maxLength);
           }
           calcularTotal();
         };
@@ -163,19 +168,18 @@
       let totalPagar = 0;
       let totalReceber = 0;
 
-      ['milhar', 'centena', 'dezena'].forEach(tipo => {
+      ['milhar', 'centena', 'dezena', 'grupo'].forEach(tipo => {
         const container = document.getElementById(tipo + 'Container');
         const grupos = container.querySelectorAll('.grupo');
         const valorUnico = parseFloat(document.getElementById("valor" + tipo.charAt(0).toUpperCase() + tipo.slice(1)).value) || 0;
 
         grupos.forEach(grupo => {
           const numero = grupo.querySelector('.numero').value.trim();
-          const divisao = parseInt(grupo.querySelector('select').value);
+          const divisao = parseInt(grupo.querySelector('select').value) || 1;
 
           if (numero && valorUnico > 0) {
             totalPagar += valorUnico;
-            const premioUnitario = valoresPremio[tipo] / divisao;
-            totalReceber += premioUnitario * valorUnico;
+            totalReceber += (valorUnico * valoresPremio[tipo]) / divisao;
           }
         });
       });
@@ -194,9 +198,9 @@
       const data = new Date();
       const codigo = Math.floor(100000 + Math.random() * 900000);
 
-      let msg = `*MULTIJOGO x5*\n*Nome:* ${nome}\n*Data:* ${data.toLocaleDateString()} ${data.toLocaleTimeString()}\n*Horário:* ${horario}\n\n`;
+      let msg = `*PLAYLINK*\n*Nome:* ${nome}\n*Data:* ${data.toLocaleDateString()} ${data.toLocaleTimeString()}\n*Horário:* ${horario}\n\n`;
 
-      ['milhar', 'centena', 'dezena'].forEach(tipo => {
+      ['milhar', 'centena', 'dezena', 'grupo'].forEach(tipo => {
         const container = document.getElementById(tipo + 'Container');
         const grupos = container.querySelectorAll('.grupo');
         const valorUnico = parseFloat(document.getElementById("valor" + tipo.charAt(0).toUpperCase() + tipo.slice(1)).value) || 0;
@@ -221,8 +225,26 @@
       window.open(whatsappURL, "_blank");
     }
 
-    // Adiciona os primeiros 5 campos automaticamente
-    ['milhar', 'centena', 'dezena'].forEach(tipo => adicionarCampos(tipo, 5));
+    ['milhar', 'centena', 'dezena', 'grupo'].forEach(tipo => adicionarCampos(tipo, 5));
+      function verificarHorarios() {
+            var horariosSelect = document.getElementById('horarioInput');
+            var agora = new Date();
+            var opcoes = horariosSelect.options;
+
+            for (var i = 0; i < opcoes.length; i++) {
+                var horario = opcoes[i].value.split('-')[0];
+                var [hora, minuto] = horario.split(':').map(Number);
+                var horarioData = new Date();
+                horarioData.setHours(hora, minuto, 0, 0);
+
+                if (horarioData < agora) {
+                    opcoes[i].disabled = true;
+                }
+            }
+        }
+
+        // Verificar horários ao carregar a página
+        document.addEventListener('DOMContentLoaded', verificarHorarios);
   </script>
 </body>
 </html>
