@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PLAY LINK</title>
+  <title>Multijogo x5</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 10px;
-      text-align:center;
       background-color: #ff000a;
     }
     .container {
@@ -74,25 +73,12 @@
 </head>
 <body>
   <div class="container">
-    <h2>PLAYER LINK</h2>
+    <h2>Multijogo x5</h2>
     <input type="text" id="nomeInput" placeholder="Seu nome" required>
     <input type="tel" id="numeroInput" placeholder="WhatsApp com DDD (somente números)" required>
 
-    <select id="horarioInput">
-           <option value="PROXIMO EXTRACAO">HORARIO</option>
-            
-            
-            <option value="10:00-BA">10:00h-BA</option>
-          
-            <option value="12:00-BA">12:00h-BA</option>
-            
-            <option value="15:00-BA">15:00h-BA</option>
-            
-            <option value="19:00-BA">19:00h-BA</option>
-            
-            <option value="21:00-BA">21:00h-BA</option>
-            
-        </select>
+    <select id="horarioInput"></select>
+
     <h3>Milhar</h3>
     <input type="number" id="valorMilhar" placeholder="Valor único da milhar" step="0.01" oninput="calcularTotal()" />
     <div id="milharContainer"></div>
@@ -114,8 +100,8 @@
     <button type="button" class="add-btn" onclick="adicionarCampos('grupo', 5)">+ Adicionar 5 Grupo</button>
 
     <div class="resultado">
-      Total a Pagar: R$ <span id="totalPagar">0.00</span><br>
-      Total a Receber: R$ <span id="totalReceber">0.00</span>
+      Total a Pagar: R$ <span id="totalPagar">0,00</span><br>
+      Total a Receber: R$ <span id="totalReceber">0,00</span>
     </div>
 
     <button onclick="enviarWhatsApp()">Enviar via WhatsApp</button>
@@ -126,8 +112,35 @@
       milhar: 5000,
       centena: 700,
       dezena: 70,
-      grupo: 18
+      grupo: 400
     };
+
+    const horariosDisponiveis = ["10:00", "12:00", "15:00", "19:00", "21:00"];
+
+    function popularHorarios() {
+      const horariosSelect = document.getElementById('horarioInput');
+      const agora = new Date();
+      let selecionado = false;
+
+      horariosDisponiveis.forEach(horario => {
+        const [hora, minuto] = horario.split(':').map(Number);
+        const horarioData = new Date();
+        horarioData.setHours(hora, minuto, 0, 0);
+
+        const option = document.createElement("option");
+        option.value = horario;
+        option.textContent = horario + "h";
+
+        if (horarioData < agora) {
+          option.disabled = true;
+        } else if (!selecionado) {
+          option.selected = true;
+          selecionado = true;
+        }
+
+        horariosSelect.appendChild(option);
+      });
+    }
 
     function adicionarCampos(tipo, quantidade) {
       const container = document.getElementById(tipo + 'Container');
@@ -184,8 +197,8 @@
         });
       });
 
-      document.getElementById("totalPagar").textContent = totalPagar.toFixed(2);
-      document.getElementById("totalReceber").textContent = totalReceber.toFixed(2);
+      document.getElementById("totalPagar").textContent = totalPagar.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById("totalReceber").textContent = totalReceber.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
     function enviarWhatsApp() {
@@ -198,7 +211,7 @@
       const data = new Date();
       const codigo = Math.floor(100000 + Math.random() * 900000);
 
-      let msg = `*PLAYLINK*\n*Nome:* ${nome}\n*Data:* ${data.toLocaleDateString()} ${data.toLocaleTimeString()}\n*Horário:* ${horario}\n\n`;
+      let msg = `        *MULTIJOGO x5*\n*Nome:* ${nome}\n*Data:* ${data.toLocaleDateString()} ${data.toLocaleTimeString()}\n*Horário:* ${horario}h\n\n`;
 
       ['milhar', 'centena', 'dezena', 'grupo'].forEach(tipo => {
         const container = document.getElementById(tipo + 'Container');
@@ -226,25 +239,7 @@
     }
 
     ['milhar', 'centena', 'dezena', 'grupo'].forEach(tipo => adicionarCampos(tipo, 5));
-      function verificarHorarios() {
-            var horariosSelect = document.getElementById('horarioInput');
-            var agora = new Date();
-            var opcoes = horariosSelect.options;
-
-            for (var i = 0; i < opcoes.length; i++) {
-                var horario = opcoes[i].value.split('-')[0];
-                var [hora, minuto] = horario.split(':').map(Number);
-                var horarioData = new Date();
-                horarioData.setHours(hora, minuto, 0, 0);
-
-                if (horarioData < agora) {
-                    opcoes[i].disabled = true;
-                }
-            }
-        }
-
-        // Verificar horários ao carregar a página
-        document.addEventListener('DOMContentLoaded', verificarHorarios);
+    document.addEventListener('DOMContentLoaded', popularHorarios);
   </script>
 </body>
 </html>
