@@ -157,7 +157,6 @@
 
     function calcularTotal() {
       let totalPagar = 0;
-
       ['milhar', 'centena', 'dezena', 'grupo'].forEach(tipo => {
         const container = document.getElementById(tipo + 'Container');
         const grupos = container.querySelectorAll('.grupo');
@@ -183,13 +182,6 @@
       const data = new Date();
       const codigo = Math.floor(100000 + Math.random() * 900000);
 
-      const fixos = {
-        milhar: "5000",
-        centena: "600.00",
-        dezena: "70.00",
-        grupo: "17.00"
-      };
-
       let msg = `*MULTIJOGO x5*\n*Nome:* ${nome}\n\n*Data:* ${data.toLocaleDateString()} ${data.toLocaleTimeString()}\n*Horário:* ${horario}\n\n`;
 
       ['milhar', 'centena', 'dezena', 'grupo'].forEach(tipo => {
@@ -197,20 +189,26 @@
         const grupos = container.querySelectorAll('.grupo');
         const valorUnico = parseFloat(document.getElementById("valor" + tipo.charAt(0).toUpperCase() + tipo.slice(1)).value) || 0;
 
-        if (grupos.length > 0) {
-          msg += `*${tipo.toUpperCase()} ${fixos[tipo]}*\n`;
-        }
+        let lista = [];
 
         grupos.forEach(grupo => {
           const numero = grupo.querySelector('.numero').value.trim();
           const divisao = grupo.querySelector('select').value;
-
           if (numero && valorUnico > 0) {
-            msg += `• ${numero} - R$${valorUnico.toFixed(2)} / ${divisao}º prêmio\n`;
+            lista.push({ numero, divisao });
           }
         });
 
-        if (grupos.length > 0) msg += `\n`;
+        // Ordenar do menor para o maior
+        lista.sort((a, b) => parseInt(a.numero) - parseInt(b.numero));
+
+        if (lista.length > 0) {
+          msg += `*${tipo.toUpperCase()} ${valoresPremio[tipo].toLocaleString('pt-BR', { minimumFractionDigits: 2 })}*\n`;
+          lista.forEach(item => {
+            msg += `• ${item.numero} - R$${valorUnico.toFixed(2)} / ${item.divisao}º prêmio\n`;
+          });
+          msg += '\n';
+        }
       });
 
       msg += `*Total a Pagar:* R$ ${totalPagar}\n*Nº Controle:* ${codigo}\n\nBoa sorte!`;
@@ -222,14 +220,14 @@
     ['milhar', 'centena', 'dezena', 'grupo'].forEach(tipo => adicionarCampos(tipo, 5));
 
     function verificarHorarios() {
-      const horariosSelect = document.getElementById('horarioInput');
-      const agora = new Date();
-      const opcoes = horariosSelect.options;
+      var horariosSelect = document.getElementById('horarioInput');
+      var agora = new Date();
+      var opcoes = horariosSelect.options;
 
-      for (let i = 0; i < opcoes.length; i++) {
-        const horario = opcoes[i].value;
-        const [hora, minuto] = horario.split(':').map(Number);
-        const horarioData = new Date();
+      for (var i = 0; i < opcoes.length; i++) {
+        var horario = opcoes[i].value;
+        var [hora, minuto] = horario.split(':').map(Number);
+        var horarioData = new Date();
         horarioData.setHours(hora, minuto, 0, 0);
 
         if (horarioData < agora) {
