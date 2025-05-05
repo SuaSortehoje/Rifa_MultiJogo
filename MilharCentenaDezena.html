@@ -77,7 +77,13 @@
     <input type="text" id="nomeInput" placeholder="Seu nome" required>
     <input type="tel" id="numeroInput" placeholder="WhatsApp com DDD (somente números)" required>
 
-    <select id="horarioInput"></select>
+    <select id="horarioInput">
+      <option value="10:00">10:00h</option>
+      <option value="12:00">12:00h</option>
+      <option value="15:00">15:00h</option>
+      <option value="19:00">19:00h</option>
+      <option value="21:00">21:00h</option>
+    </select>
 
     <h3>Milhar</h3>
     <input type="number" id="valorMilhar" placeholder="Valor único da milhar" step="0.01" oninput="calcularTotal()" />
@@ -100,8 +106,7 @@
     <button type="button" class="add-btn" onclick="adicionarCampos('grupo', 5)">+ Adicionar 5 Grupo</button>
 
     <div class="resultado">
-      Total a Pagar: R$ <span id="totalPagar">0,00</span><br>
-      Total a Receber: R$ <span id="totalReceber">0,00</span>
+      Total a Pagar: R$ <span id="totalPagar">0,00</span>
     </div>
 
     <button onclick="enviarWhatsApp()">Enviar via WhatsApp</button>
@@ -110,37 +115,10 @@
   <script>
     const valoresPremio = {
       milhar: 5000,
-      centena: 700,
+      centena: 600,
       dezena: 70,
-      grupo: 400
+      grupo: 17
     };
-
-    const horariosDisponiveis = ["10:00", "12:00", "15:00", "19:00", "21:00"];
-
-    function popularHorarios() {
-      const horariosSelect = document.getElementById('horarioInput');
-      const agora = new Date();
-      let selecionado = false;
-
-      horariosDisponiveis.forEach(horario => {
-        const [hora, minuto] = horario.split(':').map(Number);
-        const horarioData = new Date();
-        horarioData.setHours(hora, minuto, 0, 0);
-
-        const option = document.createElement("option");
-        option.value = horario;
-        option.textContent = horario + "h";
-
-        if (horarioData < agora) {
-          option.disabled = true;
-        } else if (!selecionado) {
-          option.selected = true;
-          selecionado = true;
-        }
-
-        horariosSelect.appendChild(option);
-      });
-    }
 
     function adicionarCampos(tipo, quantidade) {
       const container = document.getElementById(tipo + 'Container');
@@ -179,7 +157,6 @@
 
     function calcularTotal() {
       let totalPagar = 0;
-      let totalReceber = 0;
 
       ['milhar', 'centena', 'dezena', 'grupo'].forEach(tipo => {
         const container = document.getElementById(tipo + 'Container');
@@ -188,17 +165,13 @@
 
         grupos.forEach(grupo => {
           const numero = grupo.querySelector('.numero').value.trim();
-          const divisao = parseInt(grupo.querySelector('select').value) || 1;
-
           if (numero && valorUnico > 0) {
             totalPagar += valorUnico;
-            totalReceber += (valorUnico * valoresPremio[tipo]) / divisao;
           }
         });
       });
 
       document.getElementById("totalPagar").textContent = totalPagar.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      document.getElementById("totalReceber").textContent = totalReceber.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
     function enviarWhatsApp() {
@@ -207,18 +180,26 @@
       const numero = document.getElementById("numeroInput").value;
       const horario = document.getElementById("horarioInput").value;
       const totalPagar = document.getElementById("totalPagar").textContent;
-      const totalReceber = document.getElementById("totalReceber").textContent;
       const data = new Date();
       const codigo = Math.floor(100000 + Math.random() * 900000);
 
-      let msg = `        *MULTIJOGO x5*\n*Nome:* ${nome}\n*Data:* ${data.toLocaleDateString()} ${data.toLocaleTimeString()}\n*Horário:* ${horario}h\n\n`;
+      const fixos = {
+        milhar: "5000",
+        centena: "600.00",
+        dezena: "70.00",
+        grupo: "17.00"
+      };
+
+      let msg = `*MULTIJOGO x5*\n*Nome:* ${nome}\n\n*Data:* ${data.toLocaleDateString()} ${data.toLocaleTimeString()}\n*Horário:* ${horario}\n\n`;
 
       ['milhar', 'centena', 'dezena', 'grupo'].forEach(tipo => {
         const container = document.getElementById(tipo + 'Container');
         const grupos = container.querySelectorAll('.grupo');
         const valorUnico = parseFloat(document.getElementById("valor" + tipo.charAt(0).toUpperCase() + tipo.slice(1)).value) || 0;
 
-        if (grupos.length > 0) msg += `*${tipo.toUpperCase()}*\n`;
+        if (grupos.length > 0) {
+          msg += `*${tipo.toUpperCase()} ${fixos[tipo]}*\n`;
+        }
 
         grupos.forEach(grupo => {
           const numero = grupo.querySelector('.numero').value.trim();
@@ -229,17 +210,35 @@
           }
         });
 
-        msg += '\n';
+        if (grupos.length > 0) msg += `\n`;
       });
 
-      msg += `*Total a Pagar:* R$ ${totalPagar}\n*Total a Receber:* R$ ${totalReceber}\n*Nº Controle:* ${codigo}\n\nBoa sorte!`;
+      msg += `*Total a Pagar:* R$ ${totalPagar}\n*Nº Controle:* ${codigo}\n\nBoa sorte!`;
 
       const whatsappURL = `https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(msg)}`;
       window.open(whatsappURL, "_blank");
     }
 
     ['milhar', 'centena', 'dezena', 'grupo'].forEach(tipo => adicionarCampos(tipo, 5));
-    document.addEventListener('DOMContentLoaded', popularHorarios);
+
+    function verificarHorarios() {
+      const horariosSelect = document.getElementById('horarioInput');
+      const agora = new Date();
+      const opcoes = horariosSelect.options;
+
+      for (let i = 0; i < opcoes.length; i++) {
+        const horario = opcoes[i].value;
+        const [hora, minuto] = horario.split(':').map(Number);
+        const horarioData = new Date();
+        horarioData.setHours(hora, minuto, 0, 0);
+
+        if (horarioData < agora) {
+          opcoes[i].disabled = true;
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', verificarHorarios);
   </script>
 </body>
 </html>
