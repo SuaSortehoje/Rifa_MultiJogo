@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Multijogo x5</title>
+  <title>PLAYERLINK</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -182,7 +182,7 @@
       const data = new Date();
       const codigo = Math.floor(100000 + Math.random() * 900000);
 
-      let msg = `*MULTIJOGO x5*\n*Nome:* ${nome}\n\n*Data:* ${data.toLocaleDateString()} ${data.toLocaleTimeString()}\n*Horário:* ${horario}\n\n`;
+      let msg = `*PLAYER LINK*\n*Nome:* ${nome}\n\n*Data:* ${data.toLocaleDateString()} ${data.toLocaleTimeString()}\n*Horário:* ${horario}\n\n`;
 
       ['milhar', 'centena', 'dezena', 'grupo'].forEach(tipo => {
         const container = document.getElementById(tipo + 'Container');
